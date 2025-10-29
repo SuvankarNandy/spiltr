@@ -323,90 +323,134 @@
             font-weight: 500;
         }
 
+        .group-card-created-by {
+            color: #9e9e9e;
+            font-size: 12px;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .group-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .settlement-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .settlement-badge.settled {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .settlement-badge.unsettled {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .settlement-badge-icon {
+            font-size: 10px;
+        }
+
+
         .settlement-summary {
-    background: #E8F5E9;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
 
-.settlement-summary.all-settled {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 30px;
-    max-width: 500px;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
-    /* margin: 20px auto; */
-        margin-top: 5px;
-    margin-bottom: 30px;
-    padding: 0 30px;
-}
+        .settlement-summary.all-settled {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+            max-width: 500px;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+            /* margin: 20px auto; */
+            margin-top: 5px;
+            margin-bottom: 30px;
+            padding: 0 30px;
+        }
 
-.check-icon {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    background: #ffffff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+        .check-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.check-icon svg {
-    width: 35px;
-    height: 35px;
-    fill: none;
-    stroke: #10b981;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
+        .check-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: none;
+            stroke: #10b981;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
 
-.text-content {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
 
-.settlement-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
+        .settlement-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
 
-.settlement-subtitle {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
+        .settlement-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
 
-@keyframes checkmark {
-    0% {
-        stroke-dashoffset: 50;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 50;
+            }
 
-.check-icon svg polyline {
-    stroke-dasharray: 50;
-    stroke-dashoffset: 50;
-    animation: checkmark 0.5s ease-in-out 0.3s forwards;
-}
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .check-icon svg polyline {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: checkmark 0.5s ease-in-out 0.3s forwards;
+        }
 
 
- .settlement-summary .settlement-title {
+        .settlement-summary .settlement-title {
             color: floralwhite;
             margin: 0px;
             font-size: 24px;
@@ -654,21 +698,21 @@
             margin-bottom: 8px;
         }
 
-       .expense-details {
-    color: #9e9e9e;
-    font-size: 14px;
-    margin-top: 5px;
-}
+        .expense-details {
+            color: #9e9e9e;
+            font-size: 14px;
+            margin-top: 5px;
+        }
 
-.expense-details .paid-by-label {
-    color: #666;
-    font-weight: 500;
-}
+        .expense-details .paid-by-label {
+            color: #666;
+            font-weight: 500;
+        }
 
-.expense-details .paid-by-name {
-    font-weight: 600;
-    color: #1B5E20;
-}
+        .expense-details .paid-by-name {
+            font-weight: 600;
+            color: #1B5E20;
+        }
 
 
 
@@ -1008,6 +1052,141 @@
             background: #da190b;
         }
 
+        .join-group-step {
+            display: none;
+        }
+
+        .join-group-step.active {
+            display: block;
+        }
+
+        .member-selection-prompt {
+            background: #E8F5E9;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            color: #1B5E20;
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .member-buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .member-button {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s;
+            flex: 0 1 auto;
+        }
+
+        .member-button:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+
+        .member-button.selected {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+            color: #1B5E20;
+        }
+
+        .new-member-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .new-member-prompt {
+            text-align: center;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .new-member-button {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4CAF50;
+            transition: all 0.3s;
+        }
+
+        .new-member-button:hover {
+            background: #E8F5E9;
+        }
+
+        .new-member-button.selected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .welcome-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 12px;
+            padding: 20px 25px;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.15);
+            margin-bottom: 25px;
+        }
+
+        .welcome-icon {
+            font-size: 40px;
+            min-width: 40px;
+        }
+
+        .welcome-content {
+            flex: 1;
+        }
+
+        .welcome-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 4px 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .welcome-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .welcome-card {
+                padding: 15px 20px;
+            }
+
+            .welcome-title {
+                font-size: 20px;
+            }
+
+            .welcome-icon {
+                font-size: 35px;
+            }
+        }
+
+
         .loading {
             text-align: center;
             padding: 40px;
@@ -1085,10 +1264,7 @@
                 <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
 
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <div class="dropdown-item" id="backupAllOption" onclick="backupAllData()" style="display: none;">📥
-                        Backup All Data</div>
-                    <div class="dropdown-item" id="restoreAllOption" onclick="showRestoreAllModal()"
-                        style="display: none;">📤 Restore All Data</div>
+
                     <div class="dropdown-item" id="logoutOption" onclick="handleLogout()">🚪 Logout</div>
 
                     <div class="dropdown-item" id="copyGroupIdOption" onclick="copyGroupId()" style="display: none;">📋
@@ -1104,10 +1280,19 @@
 
             <!-- Screen 0: Groups List -->
             <div id="screen-groups-list" class="screen active">
+                <div class="welcome-card">
+                    <div class="welcome-icon">👋</div>
+                    <div class="welcome-content">
+                        <h2 class="welcome-title" id="welcomeUserName">Welcome!</h2>
+                        <p class="welcome-subtitle">Manage your groups and split expenses effortlessly</p>
+                    </div>
+                </div>
+
                 <h2 style="margin-bottom: 20px; color: #1B5E20;">My Groups</h2>
                 <div id="groupsList">
                     <div class="loading">Loading groups...</div>
                 </div>
+
 
                 <div class="bottom-actions">
                     <button class="btn btn-primary" onclick="startGroupCreation()">Create Group</button>
@@ -1341,21 +1526,7 @@
                 </div>
             </div>
 
-            <!-- Modal: Restore All Data -->
-            <div class="modal" id="restoreAllModal">
-                <div class="modal-content">
-                    <div class="modal-header">Restore All Data</div>
 
-                    <div class="input-group">
-                        <label for="restoreAllDataInput">Paste Backup JSON</label>
-                        <textarea id="restoreAllDataInput" placeholder="Paste your backup JSON here..."
-                            style="min-height: 200px;"></textarea>
-                    </div>
-
-                    <button class="btn btn-primary" onclick="restoreAllData()">Restore Data</button>
-                    <button class="btn btn-secondary" onclick="closeRestoreAllModal()">Cancel</button>
-                </div>
-            </div>
 
             <!-- Modal: Edit Group -->
             <div class="modal" id="editGroupModal">
@@ -1385,22 +1556,51 @@
             </div>
 
             <!-- Modal: Join Group -->
+            <!-- Modal: Join Group -->
             <div class="modal" id="joinGroupModal">
                 <div class="modal-content">
                     <div class="modal-header">Join Group</div>
 
-                    <div class="input-group">
-                        <label for="joinGroupId">Group ID</label>
-                        <input type="text" id="joinGroupId" placeholder="Paste group ID here">
-                        <small style="color: #757575; font-size: 12px; display: block; margin-top: 5px;">
-                            Ask the group creator to share the Group ID
-                        </small>
+                    <!-- Step 1: Enter Group ID -->
+                    <div class="join-group-step active" id="joinGroupStep1">
+                        <div class="input-group">
+                            <label for="joinGroupId">Group ID</label>
+                            <input type="text" id="joinGroupId" placeholder="Paste group ID here">
+                            <small style="color: #757575; font-size: 12px; display: block; margin-top: 5px;">
+                                Ask the group creator to share the Group ID
+                            </small>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="validateAndShowMembers()">Next</button>
+                        <button class="btn btn-secondary" onclick="closeJoinGroupModal()">Cancel</button>
                     </div>
 
-                    <button class="btn btn-primary" onclick="joinGroup()">Join Group</button>
-                    <button class="btn btn-secondary" onclick="closeJoinGroupModal()">Cancel</button>
+                    <!-- Step 2: Select Member or Add New -->
+                    <div class="join-group-step" id="joinGroupStep2">
+                        <div class="member-selection-prompt">
+                            Are you already a member? Select your name
+                        </div>
+
+                        <div class="member-buttons-container" id="memberButtonsContainer">
+                            <!-- Member buttons will be added here dynamically -->
+                        </div>
+
+                        <div class="new-member-section">
+                            <div class="new-member-prompt">
+                                Not in the list?
+                            </div>
+                            <button class="new-member-button" id="newMemberButton" onclick="selectNewMember()">
+                                ➕ Add as new member
+                            </button>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="proceedJoinGroup()"
+                            style="margin-top: 20px;">Proceed</button>
+                        <button class="btn btn-secondary" onclick="backToGroupId()">Back</button>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Firebase SDK -->
@@ -1461,6 +1661,13 @@
                     toDate: ''
                 },
                 tempGroupData: { name: '', members: [], currentUserIndex: 0, totalUsers: 0 },
+                joinGroupData: {
+                    groupId: '',
+                    groupData: null,
+                    selectedMember: null,
+                    isNewMember: false
+                },
+
                 unsubscribeGroups: null
             };
 
@@ -1645,26 +1852,6 @@
                 }
             }
 
-            function backupAllData() {
-                toggleMenu();
-                try {
-                    const data = {
-                        groups: appState.groups,
-                        backupDate: new Date().toISOString(),
-                        version: '1.0',
-                        type: 'all'
-                    };
-                    const jsonString = JSON.stringify(data, null, 2);
-                    navigator.clipboard.writeText(jsonString).then(() => {
-                        showSuccessMsg('✓ All data copied to clipboard!');
-                    }).catch(() => {
-                        fallbackCopyToClipboard(jsonString);
-                        showSuccessMsg('✓ All data copied to clipboard!');
-                    });
-                } catch (error) {
-                    alert('Error creating backup: ' + error.message);
-                }
-            }
 
             function fallbackCopyToClipboard(text) {
                 const textarea = document.createElement('textarea');
@@ -1675,74 +1862,154 @@
                 document.body.removeChild(textarea);
             }
 
-            function showRestoreAllModal() {
-                toggleMenu();
-                document.getElementById('restoreAllDataInput').value = '';
-                document.getElementById('restoreAllModal').classList.add('active');
-            }
 
-            function closeRestoreAllModal() {
-                document.getElementById('restoreAllModal').classList.remove('active');
-            }
-
-            async function restoreAllData() {
-                const jsonString = document.getElementById('restoreAllDataInput').value.trim();
-                if (!jsonString) { alert('Please paste backup JSON data'); return; }
-
-                try {
-                    const data = JSON.parse(jsonString);
-                    if (!data.groups || !Array.isArray(data.groups)) {
-                        throw new Error('Invalid backup format');
-                    }
-
-                    if (confirm('This will replace all existing data. Are you sure?')) {
-                        for (const group of appState.groups) {
-                            await deleteGroupFromFirestore(group.id);
-                        }
-                        for (const group of data.groups) {
-                            await saveGroupToFirestore(group);
-                        }
-                        closeRestoreAllModal();
-                        showSuccessMsg('✓ Data restored successfully!');
-                    }
-                } catch (error) {
-                    alert('Error restoring data: ' + error.message + '\nPlease check the JSON format.');
-                }
-            }
 
             function showJoinGroupModal() {
+                // Reset state
+                appState.joinGroupData = {
+                    groupId: '',
+                    groupData: null,
+                    selectedMember: null,
+                    isNewMember: false
+                };
+
                 document.getElementById('joinGroupId').value = '';
+                document.getElementById('joinGroupStep1').classList.add('active');
+                document.getElementById('joinGroupStep2').classList.remove('active');
                 document.getElementById('joinGroupModal').classList.add('active');
+
+                // Scroll modal to top
+                setTimeout(() => {
+                    const modal = document.getElementById('joinGroupModal');
+                    const modalContent = modal.querySelector('.modal-content');
+                    if (modalContent) modalContent.scrollTop = 0;
+                }, 0);
             }
 
             function closeJoinGroupModal() {
                 document.getElementById('joinGroupModal').classList.remove('active');
+                appState.joinGroupData = {
+                    groupId: '',
+                    groupData: null,
+                    selectedMember: null,
+                    isNewMember: false
+                };
             }
 
-            async function joinGroup() {
+            function backToGroupId() {
+                document.getElementById('joinGroupStep2').classList.remove('active');
+                document.getElementById('joinGroupStep1').classList.add('active');
+            }
+
+            async function validateAndShowMembers() {
                 const groupId = document.getElementById('joinGroupId').value.trim();
-                if (!groupId) { alert('Please enter a Group ID'); return; }
+                if (!groupId) {
+                    alert('Please enter a Group ID');
+                    return;
+                }
 
                 try {
-                    const { doc, getDoc, updateDoc } = window.firestoreFunctions;
+                    const { doc, getDoc } = window.firestoreFunctions;
                     const groupRef = doc(window.db, 'groups', groupId);
                     const groupSnap = await getDoc(groupRef);
 
                     if (groupSnap.exists()) {
                         const groupData = groupSnap.data();
-                        if (!groupData.members.includes(appState.currentUserName)) {
-                            const updatedMembers = [...groupData.members, appState.currentUserName];
-                            await updateDoc(groupRef, { members: updatedMembers });
-                        }
-                        closeJoinGroupModal();
-                        showSuccessMsg('✓ Group joined successfully!');
+                        appState.joinGroupData.groupId = groupId;
+                        appState.joinGroupData.groupData = groupData;
+
+                        // Show step 2 with member selection
+                        displayMemberSelection(groupData.members);
+                        document.getElementById('joinGroupStep1').classList.remove('active');
+                        document.getElementById('joinGroupStep2').classList.add('active');
                     } else {
                         alert('Group not found. Please check the Group ID and try again.');
                     }
                 } catch (error) {
+                    alert('Error validating group: ' + error.message);
+                }
+            }
+
+            function displayMemberSelection(members) {
+                const container = document.getElementById('memberButtonsContainer');
+                container.innerHTML = '';
+
+                members.forEach((member, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'member-button';
+                    button.textContent = member;
+                    button.onclick = () => selectExistingMember(member, button);
+                    container.appendChild(button);
+                });
+
+                // Reset new member button
+                document.getElementById('newMemberButton').classList.remove('selected');
+            }
+
+            function selectExistingMember(memberName, buttonElement) {
+                // Remove selected class from all member buttons
+                document.querySelectorAll('.member-button').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+
+                // Remove selected class from new member button
+                document.getElementById('newMemberButton').classList.remove('selected');
+
+                // Add selected class to clicked button
+                buttonElement.classList.add('selected');
+
+                // Update state
+                appState.joinGroupData.selectedMember = memberName;
+                appState.joinGroupData.isNewMember = false;
+            }
+
+            function selectNewMember() {
+                // Remove selected class from all member buttons
+                document.querySelectorAll('.member-button').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+
+                // Toggle new member button
+                const newMemberBtn = document.getElementById('newMemberButton');
+                newMemberBtn.classList.add('selected');
+
+                // Update state
+                appState.joinGroupData.selectedMember = null;
+                appState.joinGroupData.isNewMember = true;
+            }
+
+            async function proceedJoinGroup() {
+                if (!appState.joinGroupData.selectedMember && !appState.joinGroupData.isNewMember) {
+                    alert('Please select your name or choose "Add as new member"');
+                    return;
+                }
+
+                try {
+                    const { doc, updateDoc } = window.firestoreFunctions;
+                    const groupRef = doc(window.db, 'groups', appState.joinGroupData.groupId);
+
+                    if (appState.joinGroupData.isNewMember) {
+                        // Add current user as new member
+                        const currentMembers = appState.joinGroupData.groupData.members;
+                        if (!currentMembers.includes(appState.currentUserName)) {
+                            const updatedMembers = [...currentMembers, appState.currentUserName];
+                            await updateDoc(groupRef, { members: updatedMembers });
+                            showSuccessMsg(`✓ You joined as a new member!`);
+                        } else {
+                            showSuccessMsg('✓ You are already in this group!');
+                        }
+                    } else {
+                        // User selected existing member - just verify they have access
+                        showSuccessMsg(`✓ Joined as ${appState.joinGroupData.selectedMember}!`);
+                    }
+
+                    closeJoinGroupModal();
+                } catch (error) {
                     alert('Error joining group: ' + error.message);
                 }
             }
+
+
 
             function showEditGroupModal() {
                 toggleMenu();
@@ -1830,13 +2097,17 @@
             }
 
             function showGroupsList() {
+                // Update welcome message with username
+                const welcomeTitle = document.getElementById('welcomeUserName');
+                if (welcomeTitle) {
+                    welcomeTitle.textContent = `Welcome, ${appState.currentUserName}!`;
+                }
+
                 const groupsList = document.getElementById('groupsList');
                 document.getElementById('headerTitle').textContent = 'SplitWise Pro+';
                 document.getElementById('backBtn').style.display = 'none';
                 document.getElementById('fabButton').style.display = 'none';
 
-                document.getElementById('backupAllOption').style.display = 'block';
-                document.getElementById('restoreAllOption').style.display = 'block';
                 document.getElementById('logoutOption').style.display = 'block';
                 document.getElementById('copyGroupIdOption').style.display = 'none';
                 document.getElementById('editGroupOption').style.display = 'none';
@@ -1854,11 +2125,52 @@
                         const expenseCount = group.expenses ? group.expenses.length : 0;
                         const totalAmount = group.expenses ? group.expenses.reduce((sum, exp) => sum + exp.amount, 0) : 0;
 
+                        // Calculate settlement status
+                        let isSettled = true;
+                        if (group.expenses && group.expenses.length > 0) {
+                            const balances = {};
+                            group.members.forEach(member => balances[member] = 0);
+
+                            group.expenses.forEach(expense => {
+                                if (expense.type === 'split') {
+                                    balances[expense.paidBy] += expense.amount;
+                                    expense.splitAmong.forEach(member => {
+                                        balances[member] -= parseFloat(expense.perPersonAmount);
+                                    });
+                                } else if (expense.type === 'payment') {
+                                    balances[expense.paidBy] += expense.amount;
+                                    balances[expense.paidFor] -= expense.amount;
+                                } else if (expense.type === 'custom') {
+                                    balances[expense.paidBy] += expense.amount;
+                                    Object.entries(expense.customSplit).forEach(([member, amount]) => {
+                                        balances[member] -= parseFloat(amount);
+                                    });
+                                } else if (expense.type === 'settlement') {
+                                    balances[expense.from] += expense.amount;
+                                    balances[expense.to] -= expense.amount;
+                                }
+                            });
+
+                            // Check if anyone owes money (more than 0.01)
+                            isSettled = Object.values(balances).every(balance => Math.abs(balance) < 0.01);
+                        }
+
+                        const createdByText = group.createdBy || 'Unknown';
+                        const settlementBadge = isSettled
+                            ? '<span class="settlement-badge settled"><span class="settlement-badge-icon">✓</span> Settled</span>'
+                            : '<span class="settlement-badge unsettled"><span class="settlement-badge-icon">⚠</span>Settlement Pending</span>';
+
+
                         groupCard.innerHTML = `
-                        <div class="group-card-title">${group.name}</div>
-                        <div class="group-card-info">${group.members.length} members: ${group.members.join(', ')}</div>
-                        <div class="group-card-expenses">${expenseCount} transaction${expenseCount !== 1 ? 's' : ''} • Total: ₹${totalAmount.toFixed(2)}</div>
-                    `;
+    <div class="group-card-title">${group.name}</div>
+    <div class="group-card-info">${group.members.length} members: ${group.members.join(', ')}</div>
+    <div class="group-card-expenses">${expenseCount} transaction${expenseCount !== 1 ? 's' : ''} • Total: ₹${totalAmount.toFixed(2)}</div>
+    <div class="group-card-footer">
+        <div class="group-card-created-by">Created by ${createdByText}</div>
+        ${settlementBadge}
+    </div>
+`;
+
                         groupsList.appendChild(groupCard);
                     });
                 }
@@ -1940,8 +2252,6 @@
                 document.getElementById('backBtn').style.display = 'block';
                 document.getElementById('fabButton').style.display = 'flex';
 
-                document.getElementById('backupAllOption').style.display = 'none';
-                document.getElementById('restoreAllOption').style.display = 'none';
                 document.getElementById('logoutOption').style.display = 'none';
                 document.getElementById('copyGroupIdOption').style.display = 'block';
                 document.getElementById('editGroupOption').style.display = 'block';
@@ -2712,7 +3022,7 @@
                             if (expense.dateTime) html += `<div class="expense-datetime">📅 ${formatFullDateTime(expense.dateTime)}</div>`;
 
                             if (expense.type === 'split') {
-                               html += `
+                                html += `
     <div class="expense-details">
         <span class="paid-by-label">Paid by</span> <span class="paid-by-name">${expense.paidBy}</span> <span style="color: #9e9e9e;">• Split among ${expense.splitAmong.length} members</span>
         <br><span style="color: #9e9e9e;">₹${expense.perPersonAmount} per person</span>
@@ -2726,12 +3036,12 @@
 
                             } else if (expense.type === 'custom') {
                                 const splitDetails = Object.entries(expense.customSplit)
-    .map(([member, amt]) => `${member}: ₹${parseFloat(amt).toFixed(2)}`).join(', ');
-html += `
+                                    .map(([member, amt]) => `${member}: ₹${parseFloat(amt).toFixed(2)}`).join(', ');
+                                html += `
     <div class="expense-details"><span class="paid-by-label">Paid by</span> <span class="paid-by-name">${expense.paidBy}</span><br><span style="color: #9e9e9e;">${splitDetails}</span></div>
     <span class="expense-type-badge badge-custom">Split by Amount</span>`;
 
-                               
+
                             }
 
                             expenseItem.innerHTML = html;
@@ -2794,11 +3104,11 @@ html += `
                     if (creditor.amount < 0.01) j++;
                 }
 
-               if (settlements.length === 0) {
-    const summaryDiv = document.querySelector('.settlement-summary');
-    if (summaryDiv) {
-        summaryDiv.classList.add('all-settled');
-        summaryDiv.innerHTML = `
+                if (settlements.length === 0) {
+                    const summaryDiv = document.querySelector('.settlement-summary');
+                    if (summaryDiv) {
+                        summaryDiv.classList.add('all-settled');
+                        summaryDiv.innerHTML = `
             <div class="check-icon">
                 <svg viewBox="0 0 24 24">
                     <polyline points="20 6 9 17 4 12"></polyline>
@@ -2809,31 +3119,31 @@ html += `
                 <p class="settlement-subtitle">Everyone is paid back</p>
             </div>
         `;
-    }
-    const settleBtn = document.getElementById('settleUpBtn');
-    if (settleBtn) settleBtn.style.display = 'none';
-} else {
-    const summaryDiv = document.querySelector('.settlement-summary');
-    if (summaryDiv) {
-        summaryDiv.classList.remove('all-settled');
-        summaryDiv.innerHTML = `
+                    }
+                    const settleBtn = document.getElementById('settleUpBtn');
+                    if (settleBtn) settleBtn.style.display = 'none';
+                } else {
+                    const summaryDiv = document.querySelector('.settlement-summary');
+                    if (summaryDiv) {
+                        summaryDiv.classList.remove('all-settled');
+                        summaryDiv.innerHTML = `
             <h2>Who Pays Who</h2>
             <div id="settlementList"></div>
             <button class="btn btn-settle" id="settleUpBtn" onclick="openSettleUpModal()">💰 Settle Up</button>
         `;
-    }
-    
-    const settlementList = document.getElementById('settlementList');
-    if (settlementList) {
-        settlementList.innerHTML = '';
-        settlements.forEach(settlement => {
-            const settlementItem = document.createElement('div');
-            settlementItem.className = 'settlement-item';
-            settlementItem.textContent = `${settlement.from} pays ${settlement.to} ₹${settlement.amount.toFixed(2)}`;
-            settlementList.appendChild(settlementItem);
-        });
-    }
-}
+                    }
+
+                    const settlementList = document.getElementById('settlementList');
+                    if (settlementList) {
+                        settlementList.innerHTML = '';
+                        settlements.forEach(settlement => {
+                            const settlementItem = document.createElement('div');
+                            settlementItem.className = 'settlement-item';
+                            settlementItem.textContent = `${settlement.from} pays ${settlement.to} ₹${settlement.amount.toFixed(2)}`;
+                            settlementList.appendChild(settlementItem);
+                        });
+                    }
+                }
 
 
 

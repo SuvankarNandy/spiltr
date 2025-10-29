@@ -1,5 +1,4 @@
-<!-- added filters -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -325,96 +324,93 @@
         }
 
         .settlement-summary {
-            background: #E8F5E9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+    background: #E8F5E9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.settlement-summary.all-settled {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    max-width: 500px;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+    /* margin: 20px auto; */
+        margin-top: 5px;
+    margin-bottom: 30px;
+    padding: 0 30px;
+}
+
+.check-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.check-icon svg {
+    width: 35px;
+    height: 35px;
+    fill: none;
+    stroke: #10b981;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.settlement-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.settlement-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 50;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.check-icon svg polyline {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: checkmark 0.5s ease-in-out 0.3s forwards;
+}
+
+
+ .settlement-summary .settlement-title {
+            color: floralwhite;
+            margin: 0px;
+            font-size: 24px;
         }
-
-        .settlement-summary.all-settled {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 16px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
-            max-width: 400px;
-            margin: 0px auto;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 38px;
-            margin-top: 12px;
-        }
-
-        .settlement-summary.all-settled::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .check-icon {
-            width: 80px;
-            height: 80px;
-            background: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .check-icon svg {
-            width: 45px;
-            height: 45px;
-            fill: none;
-            stroke: #10b981;
-            stroke-width: 3;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .settlement-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0 0 10px 0;
-            position: relative;
-            z-index: 1;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        .settlement-subtitle {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 0;
-            position: relative;
-            z-index: 1;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        @keyframes checkmark {
-            0% {
-                stroke-dashoffset: 50;
-            }
-
-            100% {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        .check-icon svg polyline {
-            stroke-dasharray: 50;
-            stroke-dashoffset: 50;
-            animation: checkmark 0.5s ease-in-out 0.3s forwards;
-        }
-
 
         .settlement-summary h2 {
             color: #1B5E20;
@@ -431,13 +427,13 @@
             font-weight: 500;
         }
 
-        .all-settled {
+        /* .all-settled {
             text-align: center;
             color: #4CAF50;
             font-size: 18px;
             font-weight: 500;
             padding: 20px;
-        }
+        } */
 
         .expense-list-header {
             display: flex;
@@ -658,10 +654,22 @@
             margin-bottom: 8px;
         }
 
-        .expense-details .paid-by-name {
-            font-weight: 600;
-            color: #333;
-        }
+       .expense-details {
+    color: #9e9e9e;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.expense-details .paid-by-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.expense-details .paid-by-name {
+    font-weight: 600;
+    color: #1B5E20;
+}
+
 
 
         .expense-type-badge {
@@ -2704,22 +2712,26 @@
                             if (expense.dateTime) html += `<div class="expense-datetime">📅 ${formatFullDateTime(expense.dateTime)}</div>`;
 
                             if (expense.type === 'split') {
-                                html += `
-                        <div class="expense-details">
-                            Paid by <span class="paid-by-name">${expense.paidBy}</span> • Split among ${expense.splitAmong.length} members
-                            <br>₹${expense.perPersonAmount} per person
-                        </div>
-                        <span class="expense-type-badge badge-split">Split Equally</span>`;
+                               html += `
+    <div class="expense-details">
+        <span class="paid-by-label">Paid by</span> <span class="paid-by-name">${expense.paidBy}</span> <span style="color: #9e9e9e;">• Split among ${expense.splitAmong.length} members</span>
+        <br><span style="color: #9e9e9e;">₹${expense.perPersonAmount} per person</span>
+    </div>
+    <span class="expense-type-badge badge-split">Split Equally</span>`;
+
                             } else if (expense.type === 'payment') {
                                 html += `
-                        <div class="expense-details"><span class="paid-by-name">${expense.paidBy}</span> paid for ${expense.paidFor}</div>
-                        <span class="expense-type-badge badge-payment">Paid For</span>`;
+    <div class="expense-details"><span class="paid-by-label">Paid by</span> <span class="paid-by-name">${expense.paidBy}</span> <span style="color: #9e9e9e;">• paid for ${expense.paidFor}</span></div>
+    <span class="expense-type-badge badge-payment">Paid For</span>`;
+
                             } else if (expense.type === 'custom') {
                                 const splitDetails = Object.entries(expense.customSplit)
-                                    .map(([member, amt]) => `${member}: ₹${parseFloat(amt).toFixed(2)}`).join(', ');
-                                html += `
-                        <div class="expense-details">Paid by <span class="paid-by-name">${expense.paidBy}</span><br>${splitDetails}</div>
-                        <span class="expense-type-badge badge-custom">Split by Amount</span>`;
+    .map(([member, amt]) => `${member}: ₹${parseFloat(amt).toFixed(2)}`).join(', ');
+html += `
+    <div class="expense-details"><span class="paid-by-label">Paid by</span> <span class="paid-by-name">${expense.paidBy}</span><br><span style="color: #9e9e9e;">${splitDetails}</span></div>
+    <span class="expense-type-badge badge-custom">Split by Amount</span>`;
+
+                               
                             }
 
                             expenseItem.innerHTML = html;
@@ -2782,30 +2794,47 @@
                     if (creditor.amount < 0.01) j++;
                 }
 
-                if (settlements.length === 0) {
-                    const summaryDiv = document.getElementById('settlementSummary');
-                    summaryDiv.className = 'settlement-summary all-settled';
-                    summaryDiv.innerHTML = `
-        <div class="check-icon">
-            <svg viewBox="0 0 24 24">
-                <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-        </div>
-        <h2 class="settlement-title">All Settled!</h2>
-        <p class="settlement-subtitle">Everyone is paid back in full</p>
-    `;
-                } else {
-                    const summaryDiv = document.getElementById('settlementSummary');
-                    summaryDiv.className = 'settlement-summary';
+               if (settlements.length === 0) {
+    const summaryDiv = document.querySelector('.settlement-summary');
+    if (summaryDiv) {
+        summaryDiv.classList.add('all-settled');
+        summaryDiv.innerHTML = `
+            <div class="check-icon">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <div class="text-content">
+                <h2 class="settlement-title">All Settled!</h2>
+                <p class="settlement-subtitle">Everyone is paid back</p>
+            </div>
+        `;
+    }
+    const settleBtn = document.getElementById('settleUpBtn');
+    if (settleBtn) settleBtn.style.display = 'none';
+} else {
+    const summaryDiv = document.querySelector('.settlement-summary');
+    if (summaryDiv) {
+        summaryDiv.classList.remove('all-settled');
+        summaryDiv.innerHTML = `
+            <h2>Who Pays Who</h2>
+            <div id="settlementList"></div>
+            <button class="btn btn-settle" id="settleUpBtn" onclick="openSettleUpModal()">💰 Settle Up</button>
+        `;
+    }
+    
+    const settlementList = document.getElementById('settlementList');
+    if (settlementList) {
+        settlementList.innerHTML = '';
+        settlements.forEach(settlement => {
+            const settlementItem = document.createElement('div');
+            settlementItem.className = 'settlement-item';
+            settlementItem.textContent = `${settlement.from} pays ${settlement.to} ₹${settlement.amount.toFixed(2)}`;
+            settlementList.appendChild(settlementItem);
+        });
+    }
+}
 
-                    let html = '<h2>Who Pays Who</h2><div id="settlementList">';
-                    settlements.forEach(settlement => {
-                        html += `<div class="settlement-item">${settlement.from} pays ${settlement.to} ₹${settlement.amount.toFixed(2)}</div>`;
-                    });
-                    html += '</div><button class="btn btn-settle" id="settleUpBtn" onclick="openSettleUpModal()">💰 Settle Up</button>';
-
-                    summaryDiv.innerHTML = html;
-                }
 
 
             }
