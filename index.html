@@ -469,7 +469,35 @@
             margin-bottom: 8px;
             color: #1B5E20;
             font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
         }
+
+        .settlement-item-text {
+            flex: 1;
+        }
+
+        .settlement-item-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .settlement-item-btn:hover {
+            background: #45a049;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+        }
+
 
         /* .all-settled {
             text-align: center;
@@ -2371,6 +2399,39 @@
                 return appState.groups.find(g => g.id === appState.currentGroupId);
             }
 
+            function openSettleModalWithData(from, to, amount) {
+                const group = getCurrentGroup();
+                if (!group) return;
+
+                appState.editingSettlementId = null;
+                document.getElementById('settleModalTitle').textContent = 'Record Settlement';
+                document.getElementById('saveSettlementBtn').textContent = 'Record Settlement';
+                document.getElementById('saveSettlementBtn').onclick = addSettlement;
+
+                // Pre-fill the form
+                document.getElementById('settlementAmount').value = amount.toFixed(2);
+                document.getElementById('settlementDateTime').value = getCurrentDateTime();
+                document.getElementById('settlementDateTime').max = getMaxDateTime();
+
+                const fromSelect = document.getElementById('settlementFrom');
+                const toSelect = document.getElementById('settlementTo');
+
+                fromSelect.innerHTML = '<option value="">Select member</option>';
+                toSelect.innerHTML = '<option value="">Select member</option>';
+
+                group.members.forEach(member => {
+                    fromSelect.appendChild(new Option(member, member));
+                    toSelect.appendChild(new Option(member, member));
+                });
+
+                // Set pre-selected values
+                document.getElementById('settlementFrom').value = from;
+                document.getElementById('settlementTo').value = to;
+
+                document.getElementById('settleUpModal').classList.add('active');
+            }
+
+
             function openSettleUpModal() {
                 const group = getCurrentGroup();
                 if (!group) return;
@@ -3139,9 +3200,24 @@
                         settlements.forEach(settlement => {
                             const settlementItem = document.createElement('div');
                             settlementItem.className = 'settlement-item';
-                            settlementItem.textContent = `${settlement.from} pays ${settlement.to} ₹${settlement.amount.toFixed(2)}`;
+
+                            const textSpan = document.createElement('span');
+                            textSpan.className = 'settlement-item-text';
+                            textSpan.textContent = `${settlement.from} pays ${settlement.to} ₹${settlement.amount.toFixed(2)}`;
+
+                            const settleBtn = document.createElement('button');
+                            settleBtn.className = 'settlement-item-btn';
+                            settleBtn.textContent = 'Settle';
+                            settleBtn.onclick = (e) => {
+                                e.stopPropagation();
+                                openSettleModalWithData(settlement.from, settlement.to, settlement.amount);
+                            };
+
+                            settlementItem.appendChild(textSpan);
+                            settlementItem.appendChild(settleBtn);
                             settlementList.appendChild(settlementItem);
                         });
+
                     }
                 }
 
