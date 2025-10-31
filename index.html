@@ -1973,6 +1973,39 @@
             gap: 12px;
         }
 
+        /* Skeleton Loaders */
+.skeleton {
+    background: #f0f0f0;
+    border-radius: 6px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.skeleton-group-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-group-card .skeleton-title {
+    height: 18px;
+    margin-bottom: 12px;
+    width: 60%;
+}
+
+.skeleton-group-card .skeleton-info {
+    height: 14px;
+    margin-bottom: 8px;
+    width: 80%;
+}
+
+
         .summary-group-item {
             background: #f9f9f9;
             padding: 12px 15px;
@@ -2286,9 +2319,30 @@
 
 
                 <h2 style="margin-bottom: 20px; color: #1B5E20;">My Groups</h2>
+                
                 <div id="groupsList">
-                    <div class="loading">Loading groups...</div>
-                </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+</div>
+
 
 
                 <div class="bottom-actions">
@@ -3503,7 +3557,29 @@
                 document.getElementById('deleteGroupOption').style.display = 'none';
 
                 if (appState.groups.length === 0) {
-                    groupsList.innerHTML = '<div class="empty-state">No groups yet.<br>Create a new group or join an existing one!</div>';
+                    groupsList.innerHTML = `
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+`;
+
                 } else {
                     groupsList.innerHTML = '';
                     appState.groups.forEach(group => {
