@@ -30,14 +30,191 @@
             position: relative
         }
 
+        /* Launch Screen */
+        #launch-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease 2.5s forwards;
+        }
+
+        .launch-content {
+            text-align: center;
+            animation: scaleIn 0.6s ease;
+        }
+
+        .launch-logo {
+            font-size: 80px;
+            animation: scaleIn 0.6s ease;
+        }
+
+        .launch-logo img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            background: white;
+            padding: 15px;
+            animation: fadeIn 0.6s ease;
+        }
+
+
+        .launch-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin: 20px 0 10px 0;
+            animation: slideUp 0.6s ease 0.2s both;
+        }
+
+        .launch-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0 0 30px 0;
+            animation: slideUp 0.6s ease 0.3s both;
+        }
+
+        .launch-loader {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            animation: slideUp 0.6s ease 0.4s both;
+        }
+
+        .loader-dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: dotPulse 1.4s ease infinite;
+        }
+
+        .loader-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Animations */
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .launch-logo img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .launch-title {
+                font-size: 26px;
+            }
+
+            .launch-subtitle {
+                font-size: 14px;
+            }
+        }
+
+        #main-app {
+            display: none;
+            /* Make sure it starts hidden */
+            padding-top: 70px;
+        }
+
         /* Login Screen Styles */
-        .login-screen {
+        #login-screen {
+            display: none;
+            /* Changed from flex to none */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 20px;
+        }
+
+        /* .login-screen {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             padding: 0;
-        }
+        } */
 
         .login-logo {
             text-align: center;
@@ -173,7 +350,7 @@
         .screen {
             display: none;
             padding: 20px;
-            padding-top: 80px;
+            /* padding-top: 80px; */
         }
 
 
@@ -1148,186 +1325,187 @@
         }
 
         .members-list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
-    min-height: 50px;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
 
-.member-list-item-create {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 12px;
-    background: white;
-    border-radius: 6px;
-    border: 1px solid #e0e0e0;
-    transition: all 0.3s;
-    animation: slideIn 0.3s ease;
-}
+        .member-list-item-create {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease;
+        }
 
-.member-list-item-create:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transform: translateX(2px);
-}
+        .member-list-item-create:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(2px);
+        }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
 
-
-.member-list-item-create .member-name {
-    font-size: 14px;
-    color: #333;
-    font-weight: 500;
-}
-
-.member-list-item-create .member-badge {
-    font-size: 11px;
-    background: #10b981;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.member-list-item-create .remove-icon {
-    color: #f44336;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 5px;
-    transition: transform 0.2s;
-}
-
-.member-list-item-create .remove-icon:hover {
-    transform: scale(1.2);
-}
-
-.btn-add-member {
-    width: 100%;
-    padding: 10px;
-    background: white;
-    border: 2px dashed #10b981;
-    border-radius: 6px;
-    color: #10b981;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.btn-add-member:hover {
-    background: #E8F5E9;
-    border-color: #059669;
-}
-
-.create-group-container {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.create-group-card {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e0e0e0;
-}
-
-.create-group-header {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.create-group-icon {
-    font-size: 48px;
-    margin-bottom: 10px;
-}
-
-.create-group-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1B5E20;
-    margin: 0 0 5px 0;
-}
-
-.create-group-subtitle {
-    font-size: 14px;
-    color: #757575;
-    margin: 0;
-}
-
-.members-section {
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-.members-section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.members-section-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-}
-
-.members-count-badge {
-    background: #10b981;
-    color: white;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 12px;
-}
-
-.create-group-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
-}
-
-.create-group-actions .btn {
-    flex: 1;
-}
-
-@media (max-width: 600px) {
-    .create-group-card {
-        padding: 20px;
-    }
-    
-    .create-group-icon {
-        font-size: 40px;
-    }
-    
-    .create-group-title {
-        font-size: 20px;
-    }
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
 
-.add-member-icon {
-    font-size: 18px;
-    font-weight: bold;
-}
+        .member-list-item-create .member-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .member-list-item-create .member-badge {
+            font-size: 11px;
+            background: #10b981;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .member-list-item-create .remove-icon {
+            color: #f44336;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: transform 0.2s;
+        }
+
+        .member-list-item-create .remove-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .btn-add-member {
+            width: 100%;
+            padding: 10px;
+            background: white;
+            border: 2px dashed #10b981;
+            border-radius: 6px;
+            color: #10b981;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-add-member:hover {
+            background: #E8F5E9;
+            border-color: #059669;
+        }
+
+        .create-group-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .create-group-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .create-group-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .create-group-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .create-group-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1B5E20;
+            margin: 0 0 5px 0;
+        }
+
+        .create-group-subtitle {
+            font-size: 14px;
+            color: #757575;
+            margin: 0;
+        }
+
+        .members-section {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .members-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .members-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .members-count-badge {
+            background: #10b981;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .create-group-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .create-group-actions .btn {
+            flex: 1;
+        }
+
+        @media (max-width: 600px) {
+            .create-group-card {
+                padding: 20px;
+            }
+
+            .create-group-icon {
+                font-size: 40px;
+            }
+
+            .create-group-title {
+                font-size: 20px;
+            }
+        }
+
+
+        .add-member-icon {
+            font-size: 18px;
+            font-weight: bold;
+        }
 
 
         .join-group-step {
@@ -1380,77 +1558,77 @@
             color: #1B5E20;
         }
 
- .join-group-info {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: left;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
-}
+        .join-group-info {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
 
-.join-group-info-name {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1B5E20;
-    margin-bottom: 5px;
-}
+        .join-group-info-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1B5E20;
+            margin-bottom: 5px;
+        }
 
-.join-group-info-count {
-    font-size: 13px;
-    color: #059669;
-    font-weight: 500;
-}
+        .join-group-info-count {
+            font-size: 13px;
+            color: #059669;
+            font-weight: 500;
+        }
 
-.join-group-members-intro {
-    text-align: left;
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 12px;
-    font-style: italic;
-}
-
-
-.join-group-info-name {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1B5E20;
-    margin-bottom: 5px;
-}
-
-.join-group-info-count {
-    font-size: 13px;
-    color: #059669;
-    font-weight: 500;
-}
-
-.join-group-members-intro {
-    text-align: left;
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 12px;
-    font-style: italic;
-}
+        .join-group-members-intro {
+            text-align: left;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
 
 
+        .join-group-info-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1B5E20;
+            margin-bottom: 5px;
+        }
+
+        .join-group-info-count {
+            font-size: 13px;
+            color: #059669;
+            font-weight: 500;
+        }
+
+        .join-group-members-intro {
+            text-align: left;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
 
 
-       .new-member-section {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #E0E0E0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.new-member-prompt {
-    text-align: center;
-    color: #666;
-    margin-bottom: 12px;
-    font-size: 13px;
-}
+
+        .new-member-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .new-member-prompt {
+            text-align: center;
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
 
 
         .new-member-prompt {
@@ -1460,30 +1638,30 @@
             font-size: 14px;
         }
 
-       .new-member-button {
-    padding: 10px 16px;
-    background: white;
-    border: 2px solid #4CAF50;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: #4CAF50;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
+        .new-member-button {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4CAF50;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
 
-.new-member-button:hover {
-    background: #E8F5E9;
-}
+        .new-member-button:hover {
+            background: #E8F5E9;
+        }
 
-.new-member-button.selected {
-    background: #4CAF50;
-    color: white;
-}
+        .new-member-button.selected {
+            background: #4CAF50;
+            color: white;
+        }
 
 
         .new-member-button:hover {
@@ -1766,6 +1944,10 @@
                 min-width: 100%;
             }
         }
+
+        .launch-screen-hidden {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -1773,6 +1955,26 @@
     <!-- Rest of the HTML remains exactly the same -->
 
     <body>
+
+        <!-- Launch Screen -->
+        <div id="launch-screen">
+            <div class="launch-content">
+                <div class="launch-logo">
+                    <img src="https://i.postimg.cc/Zq9jcsNx/Screenshot-2025-10-29-at-5-23-01-AM.png"
+                        alt="SplitWise Pro Logo">
+                </div>
+
+                <h1 class="launch-title">SplitWise Pro+</h1>
+                <p class="launch-subtitle">Split expenses effortlessly</p>
+                <div class="launch-loader">
+                    <div class="loader-dot"></div>
+                    <div class="loader-dot"></div>
+                    <div class="loader-dot"></div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Login Screen -->
         <div id="login-screen" class="login-screen">
             <div class="login-logo">
@@ -1860,44 +2062,44 @@
                 </div>
             </div>
 
-           <!-- Screen: Create Group (Single Page) -->
-<div id="screen-create-group" class="screen">
-    <div class="create-group-container">
-        <div class="create-group-card">
-            <div class="create-group-header">
-                <div class="create-group-icon">👥</div>
-                <h2 class="create-group-title">Create New Group</h2>
-                <p class="create-group-subtitle">Set up a group to track shared expenses</p>
-            </div>
-            
-            <div class="input-group">
-                <label for="groupName">Group Name</label>
-                <input type="text" id="groupName" placeholder="e.g., Goa Trip, Roommates, Friends">
-            </div>
-            
-            <div class="input-group">
-                <label>Members</label>
-                <div class="members-section">
-                    <div class="members-section-header">
-                        <span class="members-section-title">Group Members</span>
-                        <span class="members-count-badge" id="membersCountBadge">1</span>
+            <!-- Screen: Create Group (Single Page) -->
+            <div id="screen-create-group" class="screen">
+                <div class="create-group-container">
+                    <div class="create-group-card">
+                        <div class="create-group-header">
+                            <div class="create-group-icon">👥</div>
+                            <h2 class="create-group-title">Create New Group</h2>
+                            <p class="create-group-subtitle">Set up a group to track shared expenses</p>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="groupName">Group Name</label>
+                            <input type="text" id="groupName" placeholder="e.g., Goa Trip, Roommates, Friends">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Members</label>
+                            <div class="members-section">
+                                <div class="members-section-header">
+                                    <span class="members-section-title">Group Members</span>
+                                    <span class="members-count-badge" id="membersCountBadge">1</span>
+                                </div>
+                                <div class="members-list-container" id="membersListContainer">
+                                    <!-- Members will be added here -->
+                                </div>
+                                <button class="btn-add-member" onclick="openAddMemberModal()">
+                                    <span class="add-member-icon">+</span> Add Member
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="create-group-actions">
+                            <button class="btn btn-secondary" onclick="cancelGroupCreation()">Cancel</button>
+                            <button class="btn btn-primary" onclick="createGroupFromSinglePage()">Create Group</button>
+                        </div>
                     </div>
-                    <div class="members-list-container" id="membersListContainer">
-                        <!-- Members will be added here -->
-                    </div>
-                    <button class="btn-add-member" onclick="openAddMemberModal()">
-                        <span class="add-member-icon">+</span> Add Member
-                    </button>
                 </div>
             </div>
-            
-            <div class="create-group-actions">
-                <button class="btn btn-secondary" onclick="cancelGroupCreation()">Cancel</button>
-                <button class="btn btn-primary" onclick="createGroupFromSinglePage()">Create Group</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -2126,20 +2328,20 @@
                 </div>
             </div>
 
- <!-- Modal: Add Member -->
-<div class="modal" id="addMemberModal">
-    <div class="modal-content">
-        <div class="modal-header">➕ Add Member</div>
-        
-        <div class="input-group">
-            <label for="newMemberNameInput">Member Name</label>
-            <input type="text" id="newMemberNameInput" placeholder="Enter member name">
-        </div>
+            <!-- Modal: Add Member -->
+            <div class="modal" id="addMemberModal">
+                <div class="modal-content">
+                    <div class="modal-header">➕ Add Member</div>
 
-        <button class="btn btn-primary" onclick="addMemberFromModal()">Add Member</button>
-        <button class="btn btn-secondary" onclick="closeAddMemberModal()">Cancel</button>
-    </div>
-</div>
+                    <div class="input-group">
+                        <label for="newMemberNameInput">Member Name</label>
+                        <input type="text" id="newMemberNameInput" placeholder="Enter member name">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addMemberFromModal()">Add Member</button>
+                    <button class="btn btn-secondary" onclick="closeAddMemberModal()">Cancel</button>
+                </div>
+            </div>
 
 
             <!-- Modal: Join Group -->
@@ -2163,9 +2365,9 @@
                     </div>
 
                     <!-- Step 2: Select Member or Add New -->
-<div class="join-group-step" id="joinGroupStep2">
-    <!-- Content will be dynamically populated -->
-</div>
+                    <div class="join-group-step" id="joinGroupStep2">
+                        <!-- Content will be dynamically populated -->
+                    </div>
 
                 </div>
             </div>
@@ -2202,16 +2404,28 @@
 
             window.firestoreFunctions = { collection, doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, query, where, orderBy, onSnapshot, arrayUnion, arrayRemove };
 
-            onAuthStateChanged(auth, (user) => {
+            // Hide launch screen after 2.5 seconds
+            setTimeout(() => {
+                const launchScreen = document.getElementById('launch-screen');
+                if (launchScreen) {
+                    launchScreen.style.display = 'none';
+                }
+            }, 2500);
+
+            onAuthStateChanged(auth, async (user) => {
+                // Wait for launch screen to finish (minimum 2.5s)
+                await new Promise(resolve => setTimeout(resolve, 2500));
+
                 if (user) {
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-app').style.display = 'block';
-                    window.initApp();
+                    await window.initApp();
                 } else {
                     document.getElementById('login-screen').style.display = 'flex';
                     document.getElementById('main-app').style.display = 'none';
                 }
             });
+
 
         </script>
 
@@ -2234,7 +2448,7 @@
                     fromDate: '',
                     toDate: ''
                 },
-tempGroupData: { name: '', members: [] },
+                tempGroupData: { name: '', members: [] },
                 joinGroupData: {
                     groupId: '',
                     groupData: null,
@@ -2568,12 +2782,12 @@ tempGroupData: { name: '', members: [] },
             }
 
             function displayMemberSelection(members) {
-    const groupData = appState.joinGroupData.groupData;
-    
-    // Build the HTML with group info
-    const joinStep2 = document.getElementById('joinGroupStep2');
-    
-    joinStep2.innerHTML = `
+                const groupData = appState.joinGroupData.groupData;
+
+                // Build the HTML with group info
+                const joinStep2 = document.getElementById('joinGroupStep2');
+
+                joinStep2.innerHTML = `
         <div class="join-group-info">
             <div class="join-group-info-name">${groupData.name}</div>
             <div class="join-group-info-count">${members.length} member${members.length !== 1 ? 's' : ''}</div>
@@ -2602,18 +2816,18 @@ tempGroupData: { name: '', members: [] },
         <button class="btn btn-primary" onclick="proceedJoinGroup()" style="margin-top: 20px;">Proceed</button>
         <button class="btn btn-secondary" onclick="backToGroupId()">Back</button>
     `;
-    
-    // Now populate member buttons
-    const container = document.getElementById('memberButtonsContainer');
-    
-    members.forEach((member, index) => {
-        const button = document.createElement('button');
-        button.className = 'member-button';
-        button.textContent = member;
-        button.onclick = () => selectExistingMember(member, button);
-        container.appendChild(button);
-    });
-}
+
+                // Now populate member buttons
+                const container = document.getElementById('memberButtonsContainer');
+
+                members.forEach((member, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'member-button';
+                    button.textContent = member;
+                    button.onclick = () => selectExistingMember(member, button);
+                    container.appendChild(button);
+                });
+            }
 
             function selectExistingMember(memberName, buttonElement) {
                 // Remove selected class from all member buttons
@@ -2824,126 +3038,139 @@ tempGroupData: { name: '', members: [] },
             }
 
             async function renderOverallSummary() {
-    const summaryCard = document.getElementById('overallSummaryCard');
-    if (!summaryCard) return;
-    
-    const currentUser = window.auth.currentUser;
-    if (!currentUser || !appState.currentUserGroups || appState.currentUserGroups.length === 0) {
-        summaryCard.innerHTML = `
+                const summaryCard = document.getElementById('overallSummaryCard');
+                if (!summaryCard) return;
+
+                const currentUser = window.auth.currentUser;
+                if (!currentUser || !appState.currentUserGroups || appState.currentUserGroups.length === 0) {
+                    summaryCard.innerHTML = `
             <div class="summary-no-data">
                 No groups yet. Create or join a group to see your summary!
             </div>
         `;
-        return;
-    }
-    
-    // Calculate totals
-    let totalOwe = 0;
-    let totalOwed = 0;
-    const groupSummaries = [];
-    
-    for (const userGroup of appState.currentUserGroups) {
-        const group = appState.groups.find(g => g.id === userGroup.groupId);
-        if (group) {
-            totalOwe += userGroup.needToPay || 0;
-            totalOwed += userGroup.willReceive || 0;
-            
-            // Only include if there's an amount to show
-            if ((userGroup.needToPay > 0) || (userGroup.willReceive > 0)) {
-                groupSummaries.push({
-                    name: group.name,
-                    needToPay: userGroup.needToPay || 0,
-                    willReceive: userGroup.willReceive || 0
-                });
-            }
-        }
-    }
-    
-    // Build summary HTML
-    let summaryHTML = `
+                    return;
+                }
+
+                // Calculate totals
+                let totalOwe = 0;
+                let totalOwed = 0;
+                const groupSummaries = [];
+
+                for (const userGroup of appState.currentUserGroups) {
+                    const group = appState.groups.find(g => g.id === userGroup.groupId);
+                    if (group) {
+                        totalOwe += userGroup.needToPay || 0;
+                        totalOwed += userGroup.willReceive || 0;
+
+                        // Only include if there's an amount to show
+                        if ((userGroup.needToPay > 0) || (userGroup.willReceive > 0)) {
+                            groupSummaries.push({
+                                name: group.name,
+                                needToPay: userGroup.needToPay || 0,
+                                willReceive: userGroup.willReceive || 0
+                            });
+                        }
+                    }
+                }
+
+                // Build summary HTML
+                let summaryHTML = `
         <div class="summary-header">
             <h3 class="summary-header-title">Overall Summary</h3>
             <div class="summary-totals">
     `;
 
-    // Always show both amounts (even if 0)
-    summaryHTML += `
+                // Always show both amounts (even if 0)
+                summaryHTML += `
                 <div class="summary-total-item">
                     <div class="summary-total-label owe">You Owe</div>
                     <div class="summary-total-amount owe">₹${totalOwe.toFixed(2)}</div>
                 </div>
     `;
 
-    summaryHTML += `
+                summaryHTML += `
                 <div class="summary-totals-icon">
                     <i class="fa-solid fa-arrow-right-arrow-left"></i>
                 </div>
     `;
 
-    summaryHTML += `
+                summaryHTML += `
                 <div class="summary-total-item">
                     <div class="summary-total-label owed">You're Owed</div>
                     <div class="summary-total-amount owed">₹${totalOwed.toFixed(2)}</div>
                 </div>
     `;
 
-    summaryHTML += `
+                summaryHTML += `
             </div>
         </div>
     `;
 
-    // Show "All Settled" message if both are 0
-    if (totalOwe === 0 && totalOwed === 0) {
-        summaryHTML += `
+                // Show "All Settled" message if both are 0
+                if (totalOwe === 0 && totalOwed === 0) {
+                    summaryHTML += `
             <div class="summary-settled-message">
                 <span class="summary-settled-message-icon">🎉</span>
                 <span class="summary-settled-message-text">All Settled Across All Groups!</span>
             </div>
         `;
-    }
-    
-    // Add group-wise breakdown (only if there are unsettled amounts)
-    if (groupSummaries.length > 0 && (totalOwe > 0 || totalOwed > 0)) {
-        summaryHTML += `<div class="summary-groups-list">`;
-        
-        groupSummaries.forEach(groupSum => {
-            summaryHTML += `
+                }
+
+                // Add group-wise breakdown (only if there are unsettled amounts)
+                if (groupSummaries.length > 0 && (totalOwe > 0 || totalOwed > 0)) {
+                    summaryHTML += `<div class="summary-groups-list">`;
+
+                    groupSummaries.forEach(groupSum => {
+                        summaryHTML += `
                 <div class="summary-group-item">
                     <div class="summary-group-name">${groupSum.name}</div>
                     <div class="summary-group-amounts">
             `;
-            
-            if (groupSum.needToPay > 0) {
-                summaryHTML += `
+
+                        if (groupSum.needToPay > 0) {
+                            summaryHTML += `
                         <div class="summary-amount-item pay">
                             <span class="summary-amount-icon">↑</span>
                             <span class="summary-amount-text">You need to pay ₹${groupSum.needToPay.toFixed(2)}</span>
                         </div>
                 `;
-            }
-            
-            if (groupSum.willReceive > 0) {
-                summaryHTML += `
+                        }
+
+                        if (groupSum.willReceive > 0) {
+                            summaryHTML += `
                         <div class="summary-amount-item receive">
                             <span class="summary-amount-icon">↓</span>
                             <span class="summary-amount-text">You will receive ₹${groupSum.willReceive.toFixed(2)}</span>
                         </div>
                 `;
-            }
-            
-            summaryHTML += `
+                        }
+
+                        summaryHTML += `
                     </div>
                 </div>
             `;
-        });
-        
-        summaryHTML += `</div>`;
-    }
-    
-    summaryCard.innerHTML = summaryHTML;
-}
+                    });
+
+                    summaryHTML += `</div>`;
+                }
+
+                summaryCard.innerHTML = summaryHTML;
+            }
 
             function showGroupsList() {
+                // Scroll to top
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+
+                // Sort groups by lastUpdatedAt (most recent first)
+                const sortedGroups = [...appState.groups].sort((a, b) => {
+                    const timeA = new Date(a.lastUpdatedAt || a.createdAt).getTime();
+                    const timeB = new Date(b.lastUpdatedAt || b.createdAt).getTime();
+                    return timeB - timeA; // Descending order (newest first)
+                });
+
+                // Replace appState.groups with sorted version
+                appState.groups = sortedGroups;
                 // Update welcome message with username
                 const welcomeTitle = document.getElementById('welcomeUserName');
                 // Render overall summary
@@ -3030,155 +3257,155 @@ tempGroupData: { name: '', members: [] },
             }
 
             function startGroupCreation() {
-    appState.tempGroupData = { 
-        name: '', 
-        members: [appState.currentUserName] // Start with current user
-    };
-    document.getElementById('groupName').value = '';
-    renderMembersList();
-    showScreen('screen-create-group');
-}
+                appState.tempGroupData = {
+                    name: '',
+                    members: [appState.currentUserName] // Start with current user
+                };
+                document.getElementById('groupName').value = '';
+                renderMembersList();
+                showScreen('screen-create-group');
+            }
 
-function renderMembersList() {
-    const container = document.getElementById('membersListContainer');
-    const countBadge = document.getElementById('membersCountBadge');
-    
-    container.innerHTML = '';
-    
-    appState.tempGroupData.members.forEach((member, index) => {
-        const memberItem = document.createElement('div');
-        memberItem.className = 'member-list-item-create';
-        
-        const isCurrentUser = member === appState.currentUserName;
-        
-        memberItem.innerHTML = `
+            function renderMembersList() {
+                const container = document.getElementById('membersListContainer');
+                const countBadge = document.getElementById('membersCountBadge');
+
+                container.innerHTML = '';
+
+                appState.tempGroupData.members.forEach((member, index) => {
+                    const memberItem = document.createElement('div');
+                    memberItem.className = 'member-list-item-create';
+
+                    const isCurrentUser = member === appState.currentUserName;
+
+                    memberItem.innerHTML = `
             <div class="member-name">${member}</div>
             ${isCurrentUser ? '<span class="member-badge">YOU</span>' : '<span class="remove-icon" onclick="removeMemberFromCreate(' + index + ')">×</span>'}
         `;
-        
-        container.appendChild(memberItem);
-    });
-    
-    // Update count badge
-    if (countBadge) {
-        countBadge.textContent = appState.tempGroupData.members.length;
-    }
-}
 
-function openAddMemberModal() {
-    document.getElementById('newMemberNameInput').value = '';
-    document.getElementById('addMemberModal').classList.add('active');
-    
-    // Focus on input
-    setTimeout(() => {
-        document.getElementById('newMemberNameInput').focus();
-    }, 100);
-}
-
-function closeAddMemberModal() {
-    document.getElementById('addMemberModal').classList.remove('active');
-}
-
-function addMemberFromModal() {
-    const memberName = document.getElementById('newMemberNameInput').value.trim();
-    
-    if (!memberName) {
-        alert('Please enter a member name');
-        return;
-    }
-    
-    if (appState.tempGroupData.members.includes(memberName)) {
-        alert('This member is already added');
-        return;
-    }
-    
-    appState.tempGroupData.members.push(memberName);
-    renderMembersList();
-    closeAddMemberModal();
-}
-
-function removeMemberFromCreate(index) {
-    if (appState.tempGroupData.members.length <= 2) {
-        alert('Group must have at least 2 members');
-        return;
-    }
-    
-    if (confirm('Remove this member?')) {
-        appState.tempGroupData.members.splice(index, 1);
-        renderMembersList();
-    }
-}
-
-async function createGroupFromSinglePage() {
-    const groupName = document.getElementById('groupName').value.trim();
-    
-    if (!groupName) {
-        alert('Please enter a group name');
-        return;
-    }
-    
-    if (appState.tempGroupData.members.length < 2) {
-        alert('Group must have at least 2 members');
-        return;
-    }
-    
-    try {
-        const newGroup = {
-    id: Date.now().toString(),
-    name: groupName,
-    members: appState.tempGroupData.members,
-    expenses: [],
-    createdBy: appState.currentUserName,
-    createdAt: new Date().toISOString(),
-    lastUpdatedAt: new Date().toISOString()
-};
-
-        await saveGroupToFirestore(newGroup);
-
-        // Add group to user's collection with joinedGrpAs
-        const currentUser = window.auth.currentUser;
-        if (currentUser) {
-            const { doc, getDoc, updateDoc } = window.firestoreFunctions;
-            const userRef = doc(window.db, 'users', currentUser.uid);
-            const userSnap = await getDoc(userRef);
-            
-            if (userSnap.exists()) {
-                const userData = userSnap.data();
-                let groups = userData.groups || [];
-                
-                groups.push({
-                    groupId: newGroup.id,
-                    joinedGrpAs: appState.currentUserName,
-                    needToPay: 0,
-                    willReceive: 0
+                    container.appendChild(memberItem);
                 });
-                
-                await updateDoc(userRef, { groups: groups });
-                appState.currentUserGroups = groups;
+
+                // Update count badge
+                if (countBadge) {
+                    countBadge.textContent = appState.tempGroupData.members.length;
+                }
             }
-        }
-        
-        // Add to local state immediately
-        appState.groups.push(newGroup);
-        
-        showSuccessMsg('✓ Group created successfully!');
-        openGroup(newGroup.id);
-    } catch (error) {
-        console.error('Error creating group:', error);
-        alert('Error creating group: ' + error.message);
-    }
-}
+
+            function openAddMemberModal() {
+                document.getElementById('newMemberNameInput').value = '';
+                document.getElementById('addMemberModal').classList.add('active');
+
+                // Focus on input
+                setTimeout(() => {
+                    document.getElementById('newMemberNameInput').focus();
+                }, 100);
+            }
+
+            function closeAddMemberModal() {
+                document.getElementById('addMemberModal').classList.remove('active');
+            }
+
+            function addMemberFromModal() {
+                const memberName = document.getElementById('newMemberNameInput').value.trim();
+
+                if (!memberName) {
+                    alert('Please enter a member name');
+                    return;
+                }
+
+                if (appState.tempGroupData.members.includes(memberName)) {
+                    alert('This member is already added');
+                    return;
+                }
+
+                appState.tempGroupData.members.push(memberName);
+                renderMembersList();
+                closeAddMemberModal();
+            }
+
+            function removeMemberFromCreate(index) {
+                if (appState.tempGroupData.members.length <= 2) {
+                    alert('Group must have at least 2 members');
+                    return;
+                }
+
+                if (confirm('Remove this member?')) {
+                    appState.tempGroupData.members.splice(index, 1);
+                    renderMembersList();
+                }
+            }
+
+            async function createGroupFromSinglePage() {
+                const groupName = document.getElementById('groupName').value.trim();
+
+                if (!groupName) {
+                    alert('Please enter a group name');
+                    return;
+                }
+
+                if (appState.tempGroupData.members.length < 2) {
+                    alert('Group must have at least 2 members');
+                    return;
+                }
+
+                try {
+                    const newGroup = {
+                        id: Date.now().toString(),
+                        name: groupName,
+                        members: appState.tempGroupData.members,
+                        expenses: [],
+                        createdBy: appState.currentUserName,
+                        createdAt: new Date().toISOString(),
+                        lastUpdatedAt: new Date().toISOString()
+                    };
+
+                    await saveGroupToFirestore(newGroup);
+
+                    // Add group to user's collection with joinedGrpAs
+                    const currentUser = window.auth.currentUser;
+                    if (currentUser) {
+                        const { doc, getDoc, updateDoc } = window.firestoreFunctions;
+                        const userRef = doc(window.db, 'users', currentUser.uid);
+                        const userSnap = await getDoc(userRef);
+
+                        if (userSnap.exists()) {
+                            const userData = userSnap.data();
+                            let groups = userData.groups || [];
+
+                            groups.push({
+                                groupId: newGroup.id,
+                                joinedGrpAs: appState.currentUserName,
+                                needToPay: 0,
+                                willReceive: 0
+                            });
+
+                            await updateDoc(userRef, { groups: groups });
+                            appState.currentUserGroups = groups;
+                        }
+                    }
+
+                    // Add to local state immediately
+                    appState.groups.push(newGroup);
+
+                    showSuccessMsg('✓ Group created successfully!');
+                    openGroup(newGroup.id);
+                } catch (error) {
+                    console.error('Error creating group:', error);
+                    alert('Error creating group: ' + error.message);
+                }
+            }
 
 
             function cancelGroupCreation() { showGroupsList(); }
 
-            
 
-            
 
-            
 
-            
+
+
+
+
 
             async function createGroup() {
                 try {
@@ -3228,6 +3455,10 @@ async function createGroupFromSinglePage() {
             }
 
             function openGroup(groupId) {
+                // Scroll to top
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+
                 appState.currentGroupId = groupId;
                 const group = appState.groups.find(g => g.id === groupId);
                 if (!group) { alert('Group not found'); showGroupsList(); return; }
@@ -3251,21 +3482,21 @@ async function createGroupFromSinglePage() {
             }
 
             function goBackToGroups() {
-    appState.currentGroupId = null;
-    
-    // Refresh the local group data from the updated version in appState
-    const currentGroups = appState.groups;
-    if (currentGroups.length > 0) {
-        // Sort groups by lastUpdatedAt in descending order (most recent first)
-        currentGroups.sort((a, b) => {
-            const timeA = new Date(a.lastUpdatedAt || a.createdAt).getTime();
-            const timeB = new Date(b.lastUpdatedAt || b.createdAt).getTime();
-            return timeB - timeA;
-        });
-    }
-    
-    showGroupsList();
-}
+                appState.currentGroupId = null;
+
+                // Refresh the local group data from the updated version in appState
+                const currentGroups = appState.groups;
+                if (currentGroups.length > 0) {
+                    // Sort groups by lastUpdatedAt in descending order (most recent first)
+                    currentGroups.sort((a, b) => {
+                        const timeA = new Date(a.lastUpdatedAt || a.createdAt).getTime();
+                        const timeB = new Date(b.lastUpdatedAt || b.createdAt).getTime();
+                        return timeB - timeA;
+                    });
+                }
+
+                showGroupsList();
+            }
 
 
             async function deleteCurrentGroup() {
@@ -3577,8 +3808,8 @@ async function createGroupFromSinglePage() {
                 try {
                     const updatedExpenses = [...(group.expenses || []), settlement];
                     const group2 = getCurrentGroup();
-group2.expenses = updatedExpenses;
-await saveGroupWithTimestamp(group2);
+                    group2.expenses = updatedExpenses;
+                    await saveGroupWithTimestamp(group2);
 
                     closeSettleUpModal();
                     await updateUserGroupFinancials(group.id);
@@ -3655,8 +3886,8 @@ await saveGroupWithTimestamp(group2);
                     const updatedExpenses = [...group.expenses];
                     updatedExpenses[settlementIndex] = settlement;
                     const group2 = getCurrentGroup();
-group2.expenses = updatedExpenses;
-await saveGroupWithTimestamp(group2);
+                    group2.expenses = updatedExpenses;
+                    await saveGroupWithTimestamp(group2);
 
                     closeSettleUpModal();
                     await updateUserGroupFinancials(group.id);
@@ -3668,26 +3899,26 @@ await saveGroupWithTimestamp(group2);
             }
 
             async function deleteSettlement(settlementId) {
-    const group = getCurrentGroup();
-    if (!group) return;
+                const group = getCurrentGroup();
+                if (!group) return;
 
-    if (confirm('Are you sure you want to delete this settlement?')) {
-        try {
-            const updatedExpenses = group.expenses.filter(e => e.id !== settlementId);
-            const group2 = getCurrentGroup();
-            group2.expenses = updatedExpenses;
-            await saveGroupWithTimestamp(group2);
-            
-            showSuccessMsg('✓ Settlement deleted successfully!');
-            await updateUserGroupFinancials(group.id);
-            
-        } catch (error) {
-            alert('Error deleting settlement: ' + error.message);
-        }
-    }
-}
+                if (confirm('Are you sure you want to delete this settlement?')) {
+                    try {
+                        const updatedExpenses = group.expenses.filter(e => e.id !== settlementId);
+                        const group2 = getCurrentGroup();
+                        group2.expenses = updatedExpenses;
+                        await saveGroupWithTimestamp(group2);
 
-        
+                        showSuccessMsg('✓ Settlement deleted successfully!');
+                        await updateUserGroupFinancials(group.id);
+
+                    } catch (error) {
+                        alert('Error deleting settlement: ' + error.message);
+                    }
+                }
+            }
+
+
             function selectExpenseType(type) {
                 appState.currentExpenseType = type;
                 document.querySelectorAll('.radio-option').forEach(option => option.classList.remove('active'));
@@ -3912,14 +4143,14 @@ await saveGroupWithTimestamp(group2);
             });
 
             async function saveGroupWithTimestamp(group) {
-    try {
-        group.lastUpdatedAt = new Date().toISOString();
-        await saveGroupToFirestore(group);
-    } catch (error) {
-        console.error('Error saving group:', error);
-        throw error;
-    }
-}
+                try {
+                    group.lastUpdatedAt = new Date().toISOString();
+                    await saveGroupToFirestore(group);
+                } catch (error) {
+                    console.error('Error saving group:', error);
+                    throw error;
+                }
+            }
 
 
             async function addExpense() {
@@ -3984,8 +4215,8 @@ await saveGroupWithTimestamp(group2);
                 try {
                     const updatedExpenses = [...(group.expenses || []), expense];
                     const group2 = getCurrentGroup();
-group2.expenses = updatedExpenses;
-await saveGroupWithTimestamp(group2);
+                    group2.expenses = updatedExpenses;
+                    await saveGroupWithTimestamp(group2);
 
                     closeAddExpenseModal();
                     await updateUserGroupFinancials(group.id);
@@ -4063,8 +4294,8 @@ await saveGroupWithTimestamp(group2);
                     const updatedExpenses = [...group.expenses];
                     updatedExpenses[expenseIndex] = expense;
                     const group2 = getCurrentGroup();
-group2.expenses = updatedExpenses;
-await saveGroupWithTimestamp(group2);
+                    group2.expenses = updatedExpenses;
+                    await saveGroupWithTimestamp(group2);
 
                     closeAddExpenseModal();
                     await updateUserGroupFinancials(group.id);
@@ -4083,8 +4314,8 @@ await saveGroupWithTimestamp(group2);
                     try {
                         const updatedExpenses = group.expenses.filter(e => e.id !== expenseId);
                         const group2 = getCurrentGroup();
-group2.expenses = updatedExpenses;
-await saveGroupWithTimestamp(group2);
+                        group2.expenses = updatedExpenses;
+                        await saveGroupWithTimestamp(group2);
 
                         showSuccessMsg('✓ Expense deleted successfully!');
                         await updateUserGroupFinancials(group.id);
@@ -4096,6 +4327,10 @@ await saveGroupWithTimestamp(group2);
             }
 
             function updateDashboard() {
+                // Scroll to top
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+
                 const group = getCurrentGroup();
                 if (!group) return;
 
