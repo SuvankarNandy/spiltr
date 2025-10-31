@@ -1993,6 +1993,63 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Skeleton Loader for Summary Card */
+.skeleton-summary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid e0e0e0;
+}
+
+.skeleton-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid f0f0f0;
+}
+
+.skeleton-summary-title {
+  height: 18px;
+  width: 120px;
+  margin: 0;
+}
+
+.skeleton-summary-totals {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.skeleton-summary-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-summary-label {
+  height: 12px;
+  width: 70px;
+  border-radius: 4px;
+}
+
+.skeleton-summary-amount {
+  height: 24px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.skeleton-summary-divider {
+  width: 1px;
+  min-height: 80px;
+  background: f0f0f0;
+}
+
+
 .skeleton-group-card .skeleton-title {
     height: 18px;
     margin-bottom: 12px;
@@ -2313,9 +2370,31 @@
                     </div>
                 </div>
 
-                <div class="overall-summary-card" id="overallSummaryCard">
-                    <!-- Summary content will be rendered here -->
-                </div>
+               <div class="overall-summary-card" id="overallSummaryCard">
+  <!-- Skeleton Loader (shown initially) -->
+  <div class="skeleton-summary-card" id="summarySkeletonLoader">
+    <div class="skeleton-summary-header">
+      <h3 class="skeleton skeleton-summary-title"></h3>
+    </div>
+    <div class="skeleton-summary-totals">
+      <div class="skeleton-summary-item">
+        <div class="skeleton skeleton-summary-label"></div>
+        <div class="skeleton skeleton-summary-amount"></div>
+      </div>
+      <div class="skeleton-summary-divider"></div>
+      <div class="skeleton-summary-item">
+        <div class="skeleton skeleton-summary-label"></div>
+        <div class="skeleton skeleton-summary-amount"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Real Summary Content (hidden initially) -->
+  <div id="realSummaryContent" class="hidden">
+    <!-- Summary content will be rendered here -->
+  </div>
+</div>
+
 
 
                 <h2 style="margin-bottom: 20px; color: #1B5E20;">My Groups</h2>
@@ -2864,45 +2943,73 @@
                 }
             }
 
-            async function loadGroupsFromFirestore() {
-                try {
-                    const { collection, query, orderBy, onSnapshot } = window.firestoreFunctions;
-                    const groupsRef = collection(window.db, 'groups');
+           async function loadGroupsFromFirestore() {
+  try {
+    const { collection, query, orderBy, onSnapshot } = window.firestoreFunctions;
+    const groupsRef = collection(window.db, 'groups');
 
-                    if (appState.unsubscribeGroups) appState.unsubscribeGroups();
+    // Unsubscribe from previous listener if exists
+    if (appState.unsubscribeGroups) {
+      appState.unsubscribeGroups();
+    }
 
-                    const q = query(groupsRef, orderBy('createdAt', 'desc'));
-                    appState.unsubscribeGroups = onSnapshot(q, (snapshot) => {
-                        appState.groups = [];
-                        snapshot.forEach((doc) => {
-                            const groupData = { id: doc.id, ...doc.data() };
-                            // Check if user is member of this group or has it in their user collection
-                            const currentUser = window.auth.currentUser;
-                            if (currentUser && appState.currentUserGroups) {
-                                const userGroupInfo = appState.currentUserGroups.find(ug => ug.groupId === groupData.id);
-                                if (userGroupInfo) {
-                                    // User has this group in their collection
-                                    appState.groups.push(groupData);
-                                }
-                            } else if (groupData.createdBy === appState.currentUserName ||
-                                (groupData.members && groupData.members.includes(appState.currentUserName))) {
-                                // Fallback: check by createdBy or member list
-                                appState.groups.push(groupData);
-                            }
+    // Show skeleton loader immediately while listening
+    if (!appState.currentGroupId) {
+      const skeletonLoader = document.getElementById('summarySkeletonLoader');
+      const realContent = document.getElementById('realSummaryContent');
+      if (skeletonLoader && realContent) {
+        skeletonLoader.classList.remove('hidden');
+        realContent.classList.add('hidden');
+      }
+    }
 
-                        });
+    // Query groups ordered by createdAt in descending order
+    const q = query(groupsRef, orderBy('createdAt', 'desc'));
 
-                        if (appState.currentGroupId) {
-                            updateDashboard();
-                        } else {
-                            showGroupsList();
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error loading groups:', error);
-                    showSuccessMsg('Error loading groups');
-                }
-            }
+    // Set up real-time listener
+    appState.unsubscribeGroups = onSnapshot(q, (snapshot) => {
+      appState.groups = [];
+
+      snapshot.forEach((doc) => {
+        const groupData = {
+          id: doc.id,
+          ...doc.data()
+        };
+
+        // Check if user is member of this group or has it in their user collection
+        const currentUser = window.auth.currentUser;
+        if (currentUser && appState.currentUserGroups) {
+          const userGroupInfo = appState.currentUserGroups.find(
+            (ug) => ug.groupId === groupData.id
+          );
+
+          if (userGroupInfo) {
+            // User has this group in their collection
+            appState.groups.push(groupData);
+          } else if (
+            groupData.createdBy === appState.currentUserName ||
+            groupData.members.includes(appState.currentUserName)
+          ) {
+            // Fallback check by createdBy or member list
+            appState.groups.push(groupData);
+          }
+        }
+      });
+
+      // Update dashboard if a specific group is open, otherwise show groups list
+      if (appState.currentGroupId) {
+        updateDashboard();
+      } else {
+        showGroupsList();
+        // Render overall summary (this will hide skeleton after calculation)
+        renderOverallSummary();
+      }
+    });
+  } catch (error) {
+    console.error('Error loading groups:', error);
+    showSuccessMsg('Error loading groups. Please refresh.');
+  }
+}
 
             async function saveGroupToFirestore(group) {
                 try {
@@ -3382,148 +3489,157 @@
                 }
             }
 
-            async function renderOverallSummary() {
-                const summaryCard = document.getElementById('overallSummaryCard');
-                if (!summaryCard) return;
+          async function renderOverallSummary() {
+  const summaryCard = document.getElementById('overallSummaryCard');
+  if (!summaryCard) return;
 
-                const currentUser = window.auth.currentUser;
-                if (!currentUser || !appState.currentUserGroups || appState.currentUserGroups.length === 0) {
-                    summaryCard.innerHTML = `
-            <div class="summary-header">
-        <h3 class="summary-header-title">Overall Summary</h3>
-    </div>
+  // Show skeleton loader initially
+  const skeletonLoader = document.getElementById('summarySkeletonLoader');
+  const realContent = document.getElementById('realSummaryContent');
+  
+  if (skeletonLoader && realContent) {
+    skeletonLoader.classList.remove('hidden');
+    realContent.classList.add('hidden');
+  }
+
+  const currentUser = window.auth.currentUser;
+  
+  if (!currentUser || !appState.currentUserGroups || appState.currentUserGroups.length === 0) {
+    // Hide skeleton, show empty state
+    hideAndShowSummary();
     
-    <div class="summary-totals">
-        <!-- You Owe Card -->
-        <div class="summary-total-card owe-card">
-            <div class="summary-total-item">
-                <div class="summary-total-label owe">You Owe</div>
-                <div class="summary-total-amount owe">₹${totalOwe.toFixed(2)}</div>
-            </div>
-        </div>
+    const summaryHTML = `
+      <div class="summary-header">
+        <h3 class="summary-header-title">Overall Summary</h3>
+      </div>
+      <div class="summary-no-data">
+        <p>No groups yet. Create or join a group to get started!</p>
+      </div>
+    `;
+    realContent.innerHTML = summaryHTML;
+    return;
+  }
 
-        <!-- Divider -->
-        <div class="summary-divider"></div>
+  // Calculate totals
+  let totalOwe = 0;
+  let totalOwed = 0;
+  const groupSummaries = [];
 
-        <!-- You're Owed Card -->
-        <div class="summary-total-card owed-card">
-            <div class="summary-total-item">
-                <div class="summary-total-label owed">You're Owed</div>
-                <div class="summary-total-amount owed">₹${totalOwed.toFixed(2)}</div>
-            </div>
-        </div>
+  for (const userGroup of appState.currentUserGroups) {
+    const group = appState.groups.find(g => g.id === userGroup.groupId);
+    if (group) {
+      totalOwe += userGroup.needToPay || 0;
+      totalOwed += userGroup.willReceive || 0;
+
+      // Only include if there's an amount to show
+      if ((userGroup.needToPay || 0) > 0 || (userGroup.willReceive || 0) > 0) {
+        groupSummaries.push({
+          name: group.name,
+          needToPay: userGroup.needToPay || 0,
+          willReceive: userGroup.willReceive || 0
+        });
+      }
+    }
+  }
+
+  // Build summary HTML
+  let summaryHTML = `
+    <div class="summary-header">
+      <h3 class="summary-header-title">Overall Summary</h3>
     </div>
-        `;
-                    return;
-                }
+    <div class="summary-totals">
+      <!-- You Owe Card -->
+      <div class="summary-total-item">
+        <div class="summary-total-label owe">You Owe</div>
+        <div class="summary-total-amount owe">₹${totalOwe.toFixed(2)}</div>
+      </div>
+      
+      <!-- Divider -->
+      <div class="summary-totals-icon">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+      </div>
+      
+      <!-- You're Owed Card -->
+      <div class="summary-total-item">
+        <div class="summary-total-label owed">You're Owed</div>
+        <div class="summary-total-amount owed">₹${totalOwed.toFixed(2)}</div>
+      </div>
+    </div>
+  `;
 
-                // Calculate totals
-                let totalOwe = 0;
-                let totalOwed = 0;
-                const groupSummaries = [];
-
-                for (const userGroup of appState.currentUserGroups) {
-                    const group = appState.groups.find(g => g.id === userGroup.groupId);
-                    if (group) {
-                        totalOwe += userGroup.needToPay || 0;
-                        totalOwed += userGroup.willReceive || 0;
-
-                        // Only include if there's an amount to show
-                        if ((userGroup.needToPay > 0) || (userGroup.willReceive > 0)) {
-                            groupSummaries.push({
-                                name: group.name,
-                                needToPay: userGroup.needToPay || 0,
-                                willReceive: userGroup.willReceive || 0
-                            });
-                        }
-                    }
-                }
-
-                // Build summary HTML
-                let summaryHTML = `
-        <div class="summary-header">
-            <h3 class="summary-header-title">Overall Summary</h3>
-            <div class="summary-totals">
+  // Add group-wise breakdown if available
+  if (groupSummaries.length > 0) {
+    summaryHTML += `
+      <div class="summary-groups-list">
+        <h4 style="color: #1B5E20; font-size: 15px; font-weight: 600; margin: 20px 0 0px 0;">By Group</h4>
     `;
-
-                // Always show both amounts (even if 0)
-                summaryHTML += `
-                <div class="summary-total-item">
-                    <div class="summary-total-label owe">You Owe</div>
-                    <div class="summary-total-amount owe">₹${totalOwe.toFixed(2)}</div>
-                </div>
-    `;
-
-                summaryHTML += `
-                <div class="summary-totals-icon">
-                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                </div>
-    `;
-
-                summaryHTML += `
-                <div class="summary-total-item">
-                    <div class="summary-total-label owed">You're Owed</div>
-                    <div class="summary-total-amount owed">₹${totalOwed.toFixed(2)}</div>
-                </div>
-    `;
-
-                summaryHTML += `
-            </div>
+    
+    groupSummaries.forEach(summary => {
+      summaryHTML += `
+        <div class="summary-group-item">
+          <div class="summary-group-name">${summary.name}</div>
+          <div class="summary-group-amounts">
+            ${summary.needToPay > 0 ? `
+              <div class="summary-amount-item pay">
+                <span class="summary-amount-icon">↗</span>
+                <span class="summary-amount-text">Owe ₹${summary.needToPay.toFixed(2)}</span>
+              </div>
+            ` : ''}
+            ${summary.willReceive > 0 ? `
+              <div class="summary-amount-item receive">
+                <span class="summary-amount-icon">↙</span>
+                <span class="summary-amount-text">Get ₹${summary.willReceive.toFixed(2)}</span>
+              </div>
+            ` : ''}
+          </div>
         </div>
+      `;
+    });
+    
+    summaryHTML += `</div>`;
+  }
+
+  // Add "all settled" message if no balances
+  if (totalOwe === 0 && totalOwed === 0 && appState.currentUserGroups.length > 0) {
+    summaryHTML += `
+      <div class="summary-settled-message">
+        <span class="summary-settled-message-icon">✓</span>
+        <span class="summary-settled-message-text">Everything is all settled up!</span>
+      </div>
     `;
+  }
 
-                // Show "All Settled" message if both are 0
-                if (totalOwe === 0 && totalOwed === 0) {
-                    summaryHTML += `
-            <div class="summary-settled-message">
-                <span class="summary-settled-message-icon">🎉</span>
-                <span class="summary-settled-message-text">All Settled Across All Groups!</span>
-            </div>
-        `;
-                }
+  // Update real content with calculated summary
+  realContent.innerHTML = summaryHTML;
+  
+  // Hide skeleton loader and show real content
+  hideAndShowSummary();
+}
 
-                // Add group-wise breakdown (only if there are unsettled amounts)
-                if (groupSummaries.length > 0 && (totalOwe > 0 || totalOwed > 0)) {
-                    summaryHTML += `<div class="summary-groups-list">`;
-
-                    groupSummaries.forEach(groupSum => {
-                        summaryHTML += `
-                <div class="summary-group-item">
-                    <div class="summary-group-name">${groupSum.name}</div>
-                    <div class="summary-group-amounts">
-            `;
-
-                        if (groupSum.needToPay > 0) {
-                            summaryHTML += `
-                        <div class="summary-amount-item pay">
-                            <span class="summary-amount-icon">↑</span>
-                            <span class="summary-amount-text">You need to pay ₹${groupSum.needToPay.toFixed(2)}</span>
-                        </div>
-                `;
-                        }
-
-                        if (groupSum.willReceive > 0) {
-                            summaryHTML += `
-                        <div class="summary-amount-item receive">
-                            <span class="summary-amount-icon">↓</span>
-                            <span class="summary-amount-text">You will receive ₹${groupSum.willReceive.toFixed(2)}</span>
-                        </div>
-                `;
-                        }
-
-                        summaryHTML += `
-                    </div>
-                </div>
-            `;
-                    });
-
-                    summaryHTML += `</div>`;
-                }
-
-                summaryCard.innerHTML = summaryHTML;
-            }
+// Helper function to switch from skeleton to real content
+function hideAndShowSummary() {
+  const skeletonLoader = document.getElementById('summarySkeletonLoader');
+  const realContent = document.getElementById('realSummaryContent');
+  
+  if (skeletonLoader) skeletonLoader.classList.add('hidden');
+  if (realContent) realContent.classList.remove('hidden');
+}
 
             function showGroupsList() {
+
+                 showScreen('screen-groups-list');
+  
+  // Show skeleton loader immediately
+  const skeletonLoader = document.getElementById('summarySkeletonLoader');
+  const realContent = document.getElementById('realSummaryContent');
+  if (skeletonLoader && realContent) {
+    skeletonLoader.classList.remove('hidden');
+    realContent.classList.add('hidden');
+  }
+
+  // Render actual summary (will hide skeleton after calculation)
+  renderOverallSummary();
+
                 // Scroll to top
                 window.scrollTo(0, 0);
                 document.documentElement.scrollTop = 0;
