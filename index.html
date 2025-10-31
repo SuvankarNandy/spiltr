@@ -42,8 +42,12 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            animation: fadeOut 0.5s ease 2.5s forwards;
         }
+
+        #launch-screen.hide {
+            animation: fadeOut 0.5s ease forwards;
+        }
+
 
         .launch-content {
             text-align: center;
@@ -268,116 +272,117 @@
             line-height: 1.5;
         }
 
- .header {
-    background: #4CAF50;
-    color: white;
-    padding: 18px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
+        .header {
+            background: #4CAF50;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
 
-.header-left,
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.header-refresh-btn {
-    position: absolute;
-    left: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s;
-    padding: 0;
-}
+        .header-refresh-btn {
+            position: absolute;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            padding: 0;
+        }
 
-.header-refresh-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
+        .header-refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
 
-.header-refresh-btn.loading {
-    animation: spin 1s linear infinite;
-}
-
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
+        .header-refresh-btn.loading {
+            animation: spin 1s linear infinite;
+        }
 
 
-/* Refresh Loader */
-.refresh-loader {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-}
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
 
-.refresh-loader.active {
-    display: flex;
-}
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-.loader-container {
-    text-align: center;
-}
 
-.spinner {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 25px;
-    border: 4px solid #e0e0e0;
-    border-top: 4px solid #10b981;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
+        /* Refresh Loader */
+        .refresh-loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
 
-.loader-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1B5E20;
-    margin: 0 0 8px 0;
-}
+        .refresh-loader.active {
+            display: flex;
+        }
 
-.loader-subtitle {
-    font-size: 14px;
-    color: #757575;
-    margin: 0;
-}
+        .loader-container {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 25px;
+            border: 4px solid #e0e0e0;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1B5E20;
+            margin: 0 0 8px 0;
+        }
+
+        .loader-subtitle {
+            font-size: 14px;
+            color: #757575;
+            margin: 0;
+        }
 
 
         .back-btn,
@@ -1518,37 +1523,37 @@
             border: 1px solid #e0e0e0;
         }
 
-      .create-group-header {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 25px;
-}
+        .create-group-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
 
-.create-group-header-img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
+        .create-group-header-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
 
-.create-group-header-text {
-    flex: 1;
-}
+        .create-group-header-text {
+            flex: 1;
+        }
 
-.create-group-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1B5E20;
-    margin: 0 0 5px 0;
-}
+        .create-group-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1B5E20;
+            margin: 0 0 5px 0;
+        }
 
-.create-group-subtitle {
-    font-size: 13px;
-    color: #757575;
-    margin: 0;
-    line-height: 1.4;
-}
+        .create-group-subtitle {
+            font-size: 13px;
+            color: #757575;
+            margin: 0;
+            line-height: 1.4;
+        }
 
 
         .members-section {
@@ -1582,20 +1587,20 @@
         }
 
         .create-group-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
-}
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
 
-.create-group-actions .btn {
-    flex: 1;
-    padding: 12px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-}
+        .create-group-actions .btn {
+            flex: 1;
+            padding: 12px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
 
         @media (max-width: 600px) {
             .create-group-card {
@@ -1803,153 +1808,153 @@
             border: 1px solid #e0e0e0;
         }
 
-       
+
 
         .summary-container {
-    margin-bottom: 20px;
-}
+            margin-bottom: 20px;
+        }
 
-.summary-totals-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    overflow: hidden;
-}
+        .summary-totals-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
+        }
 
-.summary-total-box {
-    flex: 1;
-    padding: 16px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-.summary-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    gap: 18px;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.summary-header-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1B5E20;
-    margin: 0;
-}
-
-.summary-totals {
-    display: flex;
-    flex-grow: 1;
-    gap: 12px;
-    align-items: stretch;
-}
-
-.summary-total-card {
-    flex: 1;
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.summary-total-item {
-        text-align: center;
-
-    flex: 1;
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.12);
-    align-items: center;
-
-}
-
-.summary-total-label {
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    margin-bottom: 8px;
-}
-
-.summary-total-label.owe {
-    color: #d32f2f;
-}
-
-.summary-total-label.owed {
-    color: #4caf50;
-}
-
-.summary-total-amount {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.summary-total-amount.owe {
-    color: #d32f2f;
-}
-
-.summary-total-amount.owed {
-    color: #4caf50;
-}
-
-.summary-divider {
-    width: 1px;
-    background: #e0e0e0;
-    min-height: 80px;
-}
+        .summary-total-box {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
 
-.summary-total-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
 
-.summary-total-label.owe {
-    color: #E65100;
-}
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            gap: 18px;
+            border-bottom: 2px solid #f0f0f0;
+        }
 
-.summary-total-label.owed {
-    color: #10b981;
-}
+        .summary-header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1B5E20;
+            margin: 0;
+        }
 
-.summary-total-amount {
-    font-size: 22px;
-    font-weight: 700;
-}
+        .summary-totals {
+            display: flex;
+            flex-grow: 1;
+            gap: 12px;
+            align-items: stretch;
+        }
 
-.summary-total-amount.owe {
-    color: #f44336;
-}
+        .summary-total-card {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.summary-total-amount.owed {
-    color: #10b981;
-}
+        .summary-total-item {
+            text-align: center;
 
-@media (max-width: 600px) {
-    .summary-total-box {
-        padding: 14px;
-    }
-    
-    .summary-total-amount {
-        font-size: 20px;
-    }
-}
+            flex: 1;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.12);
+            align-items: center;
+
+        }
+
+        .summary-total-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .summary-total-label.owe {
+            color: #d32f2f;
+        }
+
+        .summary-total-label.owed {
+            color: #4caf50;
+        }
+
+        .summary-total-amount {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .summary-total-amount.owe {
+            color: #d32f2f;
+        }
+
+        .summary-total-amount.owed {
+            color: #4caf50;
+        }
+
+        .summary-divider {
+            width: 1px;
+            background: #e0e0e0;
+            min-height: 80px;
+        }
+
+
+        .summary-total-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .summary-total-label.owe {
+            color: #E65100;
+        }
+
+        .summary-total-label.owed {
+            color: #10b981;
+        }
+
+        .summary-total-amount {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .summary-total-amount.owe {
+            color: #f44336;
+        }
+
+        .summary-total-amount.owed {
+            color: #10b981;
+        }
+
+        @media (max-width: 600px) {
+            .summary-total-box {
+                padding: 14px;
+            }
+
+            .summary-total-amount {
+                font-size: 20px;
+            }
+        }
 
 
         .summary-totals-icon {
@@ -1960,7 +1965,7 @@
         }
 
 
-       
+
 
         .summary-groups-list {
             display: flex;
@@ -2221,25 +2226,26 @@
 
         <div class="container" id="main-app" style="display: none;">
             <div class="header">
-    <div class="header-left">
-        <button class="header-refresh-btn" id="refreshBtn" onclick="refreshGroups()" style="display: none;" title="Refresh groups">
-            <i class="fa-solid fa-rotate-right"></i>
-        </button>
-        <button class="back-btn" id="backBtn" onclick="goBackToGroups()" style="display: none;">
-    <i class="fa-solid fa-arrow-left"></i>
-</button>
-    </div>
-    
-    <span id="headerTitle">SplitWise Pro</span>
-    
-    <div class="header-right">
-        <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
-    <i class="fa-solid fa-ellipsis-vertical"></i>
-</button>
+                <div class="header-left">
+                    <button class="header-refresh-btn" id="refreshBtn" onclick="refreshGroups()" style="display: none;"
+                        title="Refresh groups">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                    <button class="back-btn" id="backBtn" onclick="goBackToGroups()" style="display: none;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
 
-    </div>
-    
-    <div class="dropdown-menu" id="dropdownMenu">
+                <span id="headerTitle">SplitWise Pro</span>
+
+                <div class="header-right">
+                    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+
+                </div>
+
+                <div class="dropdown-menu" id="dropdownMenu">
 
 
                     <div class="dropdown-item" id="logoutOption" onclick="handleLogout()">🚪 Logout</div>
@@ -2256,13 +2262,13 @@
             <div class="success-msg" id="successMsg"></div>
 
             <!-- Refresh Loader -->
-<div class="refresh-loader" id="refreshLoader">
-    <div class="loader-container">
-        <div class="spinner"></div>
-        <h3 class="loader-title">Loading Groups</h3>
-        <p class="loader-subtitle">Fetching your latest data...</p>
-    </div>
-</div>
+            <div class="refresh-loader" id="refreshLoader">
+                <div class="loader-container">
+                    <div class="spinner"></div>
+                    <h3 class="loader-title">Loading Groups</h3>
+                    <p class="loader-subtitle">Fetching your latest data...</p>
+                </div>
+            </div>
 
             <!-- Screen 0: Groups List -->
             <div id="screen-groups-list" class="screen active">
@@ -2295,13 +2301,14 @@
             <div id="screen-create-group" class="screen">
                 <div class="create-group-container">
                     <div class="create-group-card">
-    <div class="create-group-header">
-        <img src="https://i.ibb.co/DdP6NHN/grp-removebg-preview.png" alt="Group icon" class="create-group-header-img">
-        <div class="create-group-header-text">
-            <h2 class="create-group-title">Create New Group</h2>
-            <p class="create-group-subtitle">Set up a group to track shared expenses</p>
-        </div>
-    </div>
+                        <div class="create-group-header">
+                            <img src="https://i.ibb.co/DdP6NHN/grp-removebg-preview.png" alt="Group icon"
+                                class="create-group-header-img">
+                            <div class="create-group-header-text">
+                                <h2 class="create-group-title">Create New Group</h2>
+                                <p class="create-group-subtitle">Set up a group to track shared expenses</p>
+                            </div>
+                        </div>
 
 
                         <div class="input-group">
@@ -2636,18 +2643,35 @@
 
             window.firestoreFunctions = { collection, doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, query, where, orderBy, onSnapshot, arrayUnion, arrayRemove };
 
-            // Hide launch screen after 2.5 seconds
-            setTimeout(() => {
+            // Track app start time and minimum launch screen duration
+            const appStartTime = Date.now();
+            const minLaunchScreenTime = 3000; // 3 seconds
+
+            onAuthStateChanged(auth, async user => {
                 const launchScreen = document.getElementById('launch-screen');
+
+                // Calculate elapsed time since app started
+                const elapsedTime = Date.now() - appStartTime;
+
+                // Calculate wait time to reach 3-second minimum
+                const waitTimeNeeded = Math.max(0, minLaunchScreenTime - elapsedTime);
+
+                // Wait for remaining time (if any)
+                if (waitTimeNeeded > 0) {
+                    await new Promise(resolve => setTimeout(resolve, waitTimeNeeded));
+                }
+
+                // Fade out launch screen
                 if (launchScreen) {
+                    launchScreen.classList.add('hide');
+
+                    // Wait for animation (0.5s)
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
                     launchScreen.style.display = 'none';
                 }
-            }, 2500);
 
-            onAuthStateChanged(auth, async (user) => {
-                // Wait for launch screen to finish (minimum 2.5s)
-                await new Promise(resolve => setTimeout(resolve, 2500));
-
+                // Show appropriate screen
                 if (user) {
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-app').style.display = 'block';
@@ -2907,38 +2931,38 @@
             }
 
             async function refreshGroups() {
-    const loader = document.getElementById('refreshLoader');
-    const btn = document.getElementById('refreshBtn');
-    
-    loader.classList.add('active');
-    btn.classList.add('loading');
-    
-    try {
-        appState.groups = [];
-        await loadGroupsFromFirestore();
-        showSuccessMsg('✓ Groups refreshed successfully!');
-    } catch (error) {
-        console.error('Error refreshing groups:', error);
-        alert('Error refreshing groups: ' + error.message);
-    } finally {
-        loader.classList.remove('active');
-        btn.classList.remove('loading');
-    }
-}
+                const loader = document.getElementById('refreshLoader');
+                const btn = document.getElementById('refreshBtn');
 
-function showRefreshLoader() {
-    const loader = document.getElementById('refreshLoader');
-    if (loader) {
-        loader.classList.add('active');
-    }
-}
+                loader.classList.add('active');
+                btn.classList.add('loading');
 
-function hideRefreshLoader() {
-    const loader = document.getElementById('refreshLoader');
-    if (loader) {
-        loader.classList.remove('active');
-    }
-}
+                try {
+                    appState.groups = [];
+                    await loadGroupsFromFirestore();
+                    showSuccessMsg('✓ Groups refreshed successfully!');
+                } catch (error) {
+                    console.error('Error refreshing groups:', error);
+                    alert('Error refreshing groups: ' + error.message);
+                } finally {
+                    loader.classList.remove('active');
+                    btn.classList.remove('loading');
+                }
+            }
+
+            function showRefreshLoader() {
+                const loader = document.getElementById('refreshLoader');
+                if (loader) {
+                    loader.classList.add('active');
+                }
+            }
+
+            function hideRefreshLoader() {
+                const loader = document.getElementById('refreshLoader');
+                if (loader) {
+                    loader.classList.remove('active');
+                }
+            }
 
 
             function toggleMenu() {
@@ -4875,19 +4899,19 @@ function hideRefreshLoader() {
             }
 
             function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
-    
-    // Show refresh button only on groups list screen
-    const refreshBtn = document.getElementById('refreshBtn');
-    if (screenId === 'screen-groups-list') {
-        refreshBtn.style.display = 'flex';
-    } else {
-        refreshBtn.style.display = 'none';
-    }
-}
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                document.getElementById(screenId).classList.add('active');
+
+                // Show refresh button only on groups list screen
+                const refreshBtn = document.getElementById('refreshBtn');
+                if (screenId === 'screen-groups-list') {
+                    refreshBtn.style.display = 'flex';
+                } else {
+                    refreshBtn.style.display = 'none';
+                }
+            }
 
 
 
