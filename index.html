@@ -593,6 +593,14 @@
             background: white;
             color: #4CAF50;
             border: 2px solid #4CAF50;
+            margin-top: 10px;
+        }
+
+        .btn-secondary-expense {
+            background: white;
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+            margin-top: 10px;
         }
 
         .btn-secondary:hover {
@@ -1252,7 +1260,24 @@
             justify-content: center;
         }
 
-        .modal-content {
+         .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 20px;
+        }
+
+        .modal-content-expense {
             background: white;
             border-radius: 8px;
             max-width: 500px;
@@ -1264,14 +1289,7 @@
         }
 
 
-        .modal-header {
-            font-size: 20px;
-            font-weight: bold;
-            color: #1B5E20;
-            margin-bottom: 20px;
-        }
-
-        .modal-header {
+        .modal-header-expense {
             font-size: 20px;
             font-weight: bold;
             color: #1B5E20;
@@ -2655,8 +2673,8 @@
             <!-- Modal: Add/Edit Expense -->
             <!-- Add/Edit Expense -->
             <div class="modal" id="addExpenseModal">
-                <div class="modal-content">
-                    <div class="modal-header" id="expenseModalTitle">Add Expense</div>
+                <div class="modal-content-expense">
+                    <div class="modal-header-expense" id="expenseModalTitle">Add Expense</div>
 
                     <!-- SCROLLABLE CONTENT AREA -->
                     <div class="modal-scroll-content">
@@ -2738,7 +2756,7 @@
                     <!-- FIXED BUTTON AREA -->
                     <div class="modal-button-bar">
                         <button class="btn btn-primary" id="saveExpenseBtn" onclick="addExpense()">Add Expense</button>
-                        <button class="btn btn-secondary" onclick="closeAddExpenseModal()">Cancel</button>
+                        <button class="btn btn-secondary" style="margin: 0;" onclick="closeAddExpenseModal()">Cancel</button>
                     </div>
                     <!-- END FIXED BUTTON AREA -->
                 </div>
