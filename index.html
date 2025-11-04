@@ -1260,7 +1260,7 @@
             justify-content: center;
         }
 
-         .modal-content {
+        .modal-content {
             background: white;
             padding: 25px;
             border-radius: 8px;
@@ -2184,6 +2184,15 @@
             padding: 12px 15px;
             border-radius: 8px;
             border-left: 4px solid #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .summary-group-info {
+            flex: 1;
         }
 
         .summary-group-name {
@@ -2192,6 +2201,9 @@
             color: #333;
             margin-bottom: 6px;
         }
+
+
+
 
         .summary-group-amounts {
             display: flex;
@@ -2221,6 +2233,40 @@
         .summary-amount-text {
             font-weight: 500;
         }
+
+        .summary-group-open-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+            min-width: 40px;
+            height: 30px;
+            flex-shrink: 0;
+        }
+
+        .summary-group-open-btn:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .summary-group-open-btn:active {
+            transform: scale(0.95);
+        }
+
+        .summary-group-open-btn i {
+            font-size: 16px;
+        }
+
 
         .summary-no-data {
             text-align: center;
@@ -2756,7 +2802,8 @@
                     <!-- FIXED BUTTON AREA -->
                     <div class="modal-button-bar">
                         <button class="btn btn-primary" id="saveExpenseBtn" onclick="addExpense()">Add Expense</button>
-                        <button class="btn btn-secondary" style="margin: 0;" onclick="closeAddExpenseModal()">Cancel</button>
+                        <button class="btn btn-secondary" style="margin: 0;"
+                            onclick="closeAddExpenseModal()">Cancel</button>
                     </div>
                     <!-- END FIXED BUTTON AREA -->
                 </div>
@@ -3662,9 +3709,11 @@
                         if ((userGroup.needToPay || 0) > 0 || (userGroup.willReceive || 0) > 0) {
                             groupSummaries.push({
                                 name: group.name,
+                                groupId: userGroup.groupId,
                                 needToPay: userGroup.needToPay || 0,
                                 willReceive: userGroup.willReceive || 0
                             });
+
                         }
                     }
                 }
@@ -3703,22 +3752,30 @@
 
                     groupSummaries.forEach(summary => {
                         summaryHTML += `
-        <div class="summary-group-item">
-          <div class="summary-group-name">${summary.name}</div>
-          <div class="summary-group-amounts">
-            ${summary.needToPay > 0 ? `
-              <div class="summary-amount-item pay">
-                <span class="summary-amount-icon">↗</span>
-                <span class="summary-amount-text">Owe ₹${summary.needToPay.toFixed(2)}</span>
-              </div>
-            ` : ''}
-            ${summary.willReceive > 0 ? `
-              <div class="summary-amount-item receive">
-                <span class="summary-amount-icon">↙</span>
-                <span class="summary-amount-text">Get ₹${summary.willReceive.toFixed(2)}</span>
-              </div>
-            ` : ''}
+                <div class="summary-group-item">
+          <div class="summary-group-info">
+            <div class="summary-group-name">${summary.name}</div>
+            <div class="summary-group-amounts">
+              ${summary.needToPay > 0 ? `
+                <div class="summary-amount-item pay">
+                  <span class="summary-amount-icon">↗</span>
+                  <span class="summary-amount-text">Owe ₹${summary.needToPay.toFixed(2)}</span>
+                </div>
+              ` : ''}
+              ${summary.willReceive > 0 ? `
+                <div class="summary-amount-item receive">
+                  <span class="summary-amount-icon">↙</span>
+                  <span class="summary-amount-text">Get ₹${summary.willReceive.toFixed(2)}</span>
+                </div>
+              ` : ''}
+                       </div>
           </div>
+          <button class="summary-group-open-btn" onclick="openGroup('${summary.groupId}')">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+
         </div>
       `;
                     });
