@@ -23,7 +23,7 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: #fbfbfb;
             min-height: 100vh;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding-bottom: 100px;
@@ -2064,7 +2064,7 @@
 
 
         .summary-group-item {
-            background: #f9f9f9;
+            background: #f7f7f7;
             padding: 12px 15px;
             border-radius: 8px;
             border-left: 4px solid #10b981;
@@ -3741,7 +3741,7 @@ function hideAndShowSummary() {
                         const createdByText = group.createdBy || 'Unknown';
                         const settlementBadge = isSettled
                             ? '<span class="settlement-badge settled"><span class="settlement-badge-icon">✓</span> Settled</span>'
-                            : '<span class="settlement-badge unsettled"><span class="settlement-badge-icon">⚠</span>Settlement Pending</span>';
+                            : '<span class="settlement-badge unsettled"><span class="settlement-badge-icon">⚠</span>Unsettled</span>';
 
 
                         groupCard.innerHTML = `
