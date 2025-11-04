@@ -593,7 +593,6 @@
             background: white;
             color: #4CAF50;
             border: 2px solid #4CAF50;
-            margin-top: 10px;
         }
 
         .btn-secondary:hover {
@@ -1255,13 +1254,15 @@
 
         .modal-content {
             background: white;
-            padding: 25px;
             border-radius: 8px;
             max-width: 500px;
             width: 90%;
             max-height: 90vh;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
+
 
         .modal-header {
             font-size: 20px;
@@ -1270,24 +1271,85 @@
             margin-bottom: 20px;
         }
 
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 20px;
+            padding: 0 25px;
+            padding-top: 25px;
+            flex-shrink: 0;
+        }
+
+        /* NEW: Scrollable content area */
+        .modal-scroll-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 25px;
+            padding-bottom: 20px;
+        }
+
+        /* NEW: Fixed button bar */
+        .modal-button-bar {
+            display: flex;
+            gap: 10px;
+            padding: 15px 25px;
+            background: white;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .modal-button-bar .btn {
+            flex: 1;
+        }
+
+        /* Responsive adjustment for mobile */
+        @media (max-width: 600px) {
+            .modal-button-bar {
+                padding: 12px 20px;
+            }
+        }
+
+
         .radio-group {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 10px;
             margin-bottom: 20px;
+            justify-content: space-between;
         }
 
         .radio-option {
             flex: 1;
-            min-width: 140px;
-            padding: 12px;
+            min-width: 0;
+            padding: 12px 10px;
             border: 2px solid #E0E0E0;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            background: #ffffff;
+            color: #333;
         }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option.active {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+            color: #1B5E20;
+        }
+
+        .radio-option:active {
+            transform: scale(0.98);
+        }
+
 
         .radio-option:hover {
             border-color: #4CAF50;
@@ -1305,23 +1367,51 @@
         }
 
         .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-start;
             margin-bottom: 20px;
         }
+
+        .checkbox-group>label {
+            width: 100%;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        #splitAmongList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            padding: 10px;
-            margin-bottom: 8px;
+            padding: 8px 12px;
             border: 1px solid #E0E0E0;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            white-space: nowrap;
+            background: white;
+            flex-shrink: 0;
         }
 
         .checkbox-item:hover {
-            background: #f5f5f5;
+            background: #f9f9f9;
+            border-color: #4CAF50;
         }
+
+        .checkbox-item.selected {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+            font-weight: 500;
+        }
+
 
         .checkbox-item input[type="checkbox"] {
             width: 20px;
@@ -1974,93 +2064,100 @@
         }
 
         /* Skeleton Loaders */
-.skeleton {
-    background: #f0f0f0;
-    border-radius: 6px;
-    animation: pulse 1.5s ease-in-out infinite;
-}
+        .skeleton {
+            background: #f0f0f0;
+            border-radius: 6px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
+        @keyframes pulse {
 
-.skeleton-group-card {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+            0%,
+            100% {
+                opacity: 0.6;
+            }
 
-/* Skeleton Loader for Summary Card */
-.skeleton-summary-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid e0e0e0;
-}
+            50% {
+                opacity: 1;
+            }
+        }
 
-.skeleton-summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid f0f0f0;
-}
+        .skeleton-group-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-.skeleton-summary-title {
-  height: 18px;
-  width: 120px;
-  margin: 0;
-}
+        /* Skeleton Loader for Summary Card */
+        .skeleton-summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid e0e0e0;
+        }
 
-.skeleton-summary-totals {
-  display: flex;
-  gap: 12px;
-  align-items: stretch;
-}
+        .skeleton-summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid f0f0f0;
+        }
 
-.skeleton-summary-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+        .skeleton-summary-title {
+            height: 18px;
+            width: 120px;
+            margin: 0;
+        }
 
-.skeleton-summary-label {
-  height: 12px;
-  width: 70px;
-  border-radius: 4px;
-}
+        .skeleton-summary-totals {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
 
-.skeleton-summary-amount {
-  height: 24px;
-  width: 100%;
-  border-radius: 4px;
-}
+        .skeleton-summary-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-.skeleton-summary-divider {
-  width: 1px;
-  min-height: 80px;
-  background: f0f0f0;
-}
+        .skeleton-summary-label {
+            height: 12px;
+            width: 70px;
+            border-radius: 4px;
+        }
+
+        .skeleton-summary-amount {
+            height: 24px;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .skeleton-summary-divider {
+            width: 1px;
+            min-height: 80px;
+            background: f0f0f0;
+        }
 
 
-.skeleton-group-card .skeleton-title {
-    height: 18px;
-    margin-bottom: 12px;
-    width: 60%;
-}
+        .skeleton-group-card .skeleton-title {
+            height: 18px;
+            margin-bottom: 12px;
+            width: 60%;
+        }
 
-.skeleton-group-card .skeleton-info {
-    height: 14px;
-    margin-bottom: 8px;
-    width: 80%;
-}
+        .skeleton-group-card .skeleton-info {
+            height: 14px;
+            margin-bottom: 8px;
+            width: 80%;
+        }
 
 
         .summary-group-item {
@@ -2240,9 +2337,7 @@
                 padding: 8px 10px;
             }
 
-            .radio-option {
-                min-width: 100%;
-            }
+
         }
 
         .launch-screen-hidden {
@@ -2370,57 +2465,57 @@
                     </div>
                 </div>
 
-               <div class="overall-summary-card" id="overallSummaryCard">
-  <!-- Skeleton Loader (shown initially) -->
-  <div class="skeleton-summary-card" id="summarySkeletonLoader">
-    <div class="skeleton-summary-header">
-      <h3 class="skeleton skeleton-summary-title"></h3>
-    </div>
-    <div class="skeleton-summary-totals">
-      <div class="skeleton-summary-item">
-        <div class="skeleton skeleton-summary-label"></div>
-        <div class="skeleton skeleton-summary-amount"></div>
-      </div>
-      <div class="skeleton-summary-divider"></div>
-      <div class="skeleton-summary-item">
-        <div class="skeleton skeleton-summary-label"></div>
-        <div class="skeleton skeleton-summary-amount"></div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Real Summary Content (hidden initially) -->
-  <div id="realSummaryContent" class="hidden">
-    <!-- Summary content will be rendered here -->
-  </div>
-</div>
+                <div class="overall-summary-card" id="overallSummaryCard">
+                    <!-- Skeleton Loader (shown initially) -->
+                    <div class="skeleton-summary-card" id="summarySkeletonLoader">
+                        <div class="skeleton-summary-header">
+                            <h3 class="skeleton skeleton-summary-title"></h3>
+                        </div>
+                        <div class="skeleton-summary-totals">
+                            <div class="skeleton-summary-item">
+                                <div class="skeleton skeleton-summary-label"></div>
+                                <div class="skeleton skeleton-summary-amount"></div>
+                            </div>
+                            <div class="skeleton-summary-divider"></div>
+                            <div class="skeleton-summary-item">
+                                <div class="skeleton skeleton-summary-label"></div>
+                                <div class="skeleton skeleton-summary-amount"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Real Summary Content (hidden initially) -->
+                    <div id="realSummaryContent" class="hidden">
+                        <!-- Summary content will be rendered here -->
+                    </div>
+                </div>
 
 
 
                 <h2 style="margin-bottom: 20px; color: #1B5E20;">My Groups</h2>
-                
+
                 <div id="groupsList">
-    <div class="skeleton-group-card">
-        <div class="skeleton skeleton-title"></div>
-        <div class="skeleton skeleton-info"></div>
-        <div class="skeleton skeleton-info"></div>
-    </div>
-    <div class="skeleton-group-card">
-        <div class="skeleton skeleton-title"></div>
-        <div class="skeleton skeleton-info"></div>
-        <div class="skeleton skeleton-info"></div>
-    </div>
-    <div class="skeleton-group-card">
-        <div class="skeleton skeleton-title"></div>
-        <div class="skeleton skeleton-info"></div>
-        <div class="skeleton skeleton-info"></div>
-    </div>
-    <div class="skeleton-group-card">
-        <div class="skeleton skeleton-title"></div>
-        <div class="skeleton skeleton-info"></div>
-        <div class="skeleton skeleton-info"></div>
-    </div>
-</div>
+                    <div class="skeleton-group-card">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-info"></div>
+                        <div class="skeleton skeleton-info"></div>
+                    </div>
+                    <div class="skeleton-group-card">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-info"></div>
+                        <div class="skeleton skeleton-info"></div>
+                    </div>
+                    <div class="skeleton-group-card">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-info"></div>
+                        <div class="skeleton skeleton-info"></div>
+                    </div>
+                    <div class="skeleton-group-card">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-info"></div>
+                        <div class="skeleton skeleton-info"></div>
+                    </div>
+                </div>
 
 
 
@@ -2557,84 +2652,97 @@
             <div class="fab" id="fabButton" onclick="openAddExpenseModal()" style="display: none;"></div>
 
             <!-- Modal: Add/Edit Expense -->
+            <!-- Add/Edit Expense -->
             <div class="modal" id="addExpenseModal">
                 <div class="modal-content">
                     <div class="modal-header" id="expenseModalTitle">Add Expense</div>
 
-                    <div class="input-group">
-                        <label for="expenseName">Expense Name</label>
-                        <input type="text" id="expenseName" placeholder="e.g., Dinner, Movie tickets">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="expenseDescription">Description (Optional)</label>
-                        <textarea id="expenseDescription" placeholder="Add details about this expense..."></textarea>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="expenseAmount">Expense Amount (₹)</label>
-                        <input type="number" id="expenseAmount" placeholder="0.00" step="0.01" min="0">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="expenseDateTime">Date & Time</label>
-                        <input type="datetime-local" id="expenseDateTime">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="paidBy">Who Paid?</label>
-                        <select id="paidBy">
-                            <option value="">Select member</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Expense Type</label>
-                        <div class="radio-group">
-                            <div class="radio-option active" onclick="selectExpenseType('split')">
-                                <input type="radio" name="expenseType" value="split" checked>
-                                Split Equally
-                            </div>
-                            <div class="radio-option" onclick="selectExpenseType('payment')">
-                                <input type="radio" name="expenseType" value="payment">
-                                Paid For
-                            </div>
-                            <div class="radio-option" onclick="selectExpenseType('custom')">
-                                <input type="radio" name="expenseType" value="custom">
-                                Split by Amount
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="splitEquallySection">
-                        <div class="checkbox-group">
-                            <label>Split Among</label>
-                            <div id="splitAmongList"></div>
-                        </div>
-                        <div class="split-info" id="splitInfo">Select members to see split</div>
-                    </div>
-
-                    <div id="paidForSection" class="hidden">
+                    <!-- SCROLLABLE CONTENT AREA -->
+                    <div class="modal-scroll-content">
                         <div class="input-group">
-                            <label for="paidFor">Paid For</label>
-                            <select id="paidFor">
+                            <label for="expenseName">Expense Name</label>
+                            <input type="text" id="expenseName" placeholder="e.g., Dinner, Movie tickets">
+                        </div>
+
+
+
+                        <div class="input-group">
+                            <label for="expenseAmount">Expense Amount (₹)</label>
+                            <input type="number" id="expenseAmount" placeholder="0.00" step="0.01" min="0">
+                        </div>
+
+
+                        <div class="input-group">
+                            <label for="paidBy">Who Paid?</label>
+                            <select id="paidBy">
                                 <option value="">Select member</option>
                             </select>
                         </div>
-                    </div>
 
-                    <div id="customSplitSection" class="hidden">
                         <div class="input-group">
-                            <label>Specify Amount for Each Person</label>
-                            <div id="customSplitList"></div>
+                            <label>Expense Type</label>
+                            <div class="radio-group">
+                                <div class="radio-option active" onclick="selectExpenseType('split')">
+                                    <input type="radio" name="expenseType" value="split" checked>
+                                    Split Equally
+                                </div>
+                                <div class="radio-option" onclick="selectExpenseType('payment')">
+                                    <input type="radio" name="expenseType" value="payment">
+                                    Paid For
+                                </div>
+                                <div class="radio-option" onclick="selectExpenseType('custom')">
+                                    <input type="radio" name="expenseType" value="custom">
+                                    Split by Amount
+                                </div>
+                            </div>
                         </div>
-                        <div class="split-info" id="customSplitInfo">Enter amounts to see total</div>
-                    </div>
 
-                    <button class="btn btn-primary" id="saveExpenseBtn" onclick="addExpense()">Add Expense</button>
-                    <button class="btn btn-secondary" onclick="closeAddExpenseModal()">Cancel</button>
+                        <div id="splitEquallySection">
+                            <div class="checkbox-group">
+                                <label>Split Among</label>
+                                <div id="splitAmongList"></div>
+                            </div>
+                            <div class="split-info" id="splitInfo">Select members to see split</div>
+                        </div>
+
+                        <div id="paidForSection" class="hidden">
+                            <div class="input-group">
+                                <label for="paidFor">Paid For</label>
+                                <select id="paidFor">
+                                    <option value="">Select member</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="customSplitSection" class="hidden">
+                            <div class="input-group">
+                                <label>Specify Amount for Each Person</label>
+                                <div id="customSplitList"></div>
+                            </div>
+                            <div class="split-info" id="customSplitInfo">Enter amounts to see total</div>
+                        </div>
+
+                        <div class="input-group" style="margin-top: 33px;">
+                            <label for="expenseDescription">Description (Optional)</label>
+                            <textarea id="expenseDescription"
+                                placeholder="Add details about this expense..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="expenseDateTime">Date & Time</label>
+                            <input type="datetime-local" id="expenseDateTime">
+                        </div>
+                    </div>
+                    <!-- END SCROLLABLE CONTENT AREA -->
+
+                    <!-- FIXED BUTTON AREA -->
+                    <div class="modal-button-bar">
+                        <button class="btn btn-primary" id="saveExpenseBtn" onclick="addExpense()">Add Expense</button>
+                        <button class="btn btn-secondary" onclick="closeAddExpenseModal()">Cancel</button>
+                    </div>
+                    <!-- END FIXED BUTTON AREA -->
                 </div>
             </div>
+
 
             <!-- Modal: Settle Up -->
             <div class="modal" id="settleUpModal">
@@ -2943,73 +3051,73 @@
                 }
             }
 
-           async function loadGroupsFromFirestore() {
-  try {
-    const { collection, query, orderBy, onSnapshot } = window.firestoreFunctions;
-    const groupsRef = collection(window.db, 'groups');
+            async function loadGroupsFromFirestore() {
+                try {
+                    const { collection, query, orderBy, onSnapshot } = window.firestoreFunctions;
+                    const groupsRef = collection(window.db, 'groups');
 
-    // Unsubscribe from previous listener if exists
-    if (appState.unsubscribeGroups) {
-      appState.unsubscribeGroups();
-    }
+                    // Unsubscribe from previous listener if exists
+                    if (appState.unsubscribeGroups) {
+                        appState.unsubscribeGroups();
+                    }
 
-    // Show skeleton loader immediately while listening
-    if (!appState.currentGroupId) {
-      const skeletonLoader = document.getElementById('summarySkeletonLoader');
-      const realContent = document.getElementById('realSummaryContent');
-      if (skeletonLoader && realContent) {
-        skeletonLoader.classList.remove('hidden');
-        realContent.classList.add('hidden');
-      }
-    }
+                    // Show skeleton loader immediately while listening
+                    if (!appState.currentGroupId) {
+                        const skeletonLoader = document.getElementById('summarySkeletonLoader');
+                        const realContent = document.getElementById('realSummaryContent');
+                        if (skeletonLoader && realContent) {
+                            skeletonLoader.classList.remove('hidden');
+                            realContent.classList.add('hidden');
+                        }
+                    }
 
-    // Query groups ordered by createdAt in descending order
-    const q = query(groupsRef, orderBy('createdAt', 'desc'));
+                    // Query groups ordered by createdAt in descending order
+                    const q = query(groupsRef, orderBy('createdAt', 'desc'));
 
-    // Set up real-time listener
-    appState.unsubscribeGroups = onSnapshot(q, (snapshot) => {
-      appState.groups = [];
+                    // Set up real-time listener
+                    appState.unsubscribeGroups = onSnapshot(q, (snapshot) => {
+                        appState.groups = [];
 
-      snapshot.forEach((doc) => {
-        const groupData = {
-          id: doc.id,
-          ...doc.data()
-        };
+                        snapshot.forEach((doc) => {
+                            const groupData = {
+                                id: doc.id,
+                                ...doc.data()
+                            };
 
-        // Check if user is member of this group or has it in their user collection
-        const currentUser = window.auth.currentUser;
-        if (currentUser && appState.currentUserGroups) {
-          const userGroupInfo = appState.currentUserGroups.find(
-            (ug) => ug.groupId === groupData.id
-          );
+                            // Check if user is member of this group or has it in their user collection
+                            const currentUser = window.auth.currentUser;
+                            if (currentUser && appState.currentUserGroups) {
+                                const userGroupInfo = appState.currentUserGroups.find(
+                                    (ug) => ug.groupId === groupData.id
+                                );
 
-          if (userGroupInfo) {
-            // User has this group in their collection
-            appState.groups.push(groupData);
-          } else if (
-            groupData.createdBy === appState.currentUserName ||
-            groupData.members.includes(appState.currentUserName)
-          ) {
-            // Fallback check by createdBy or member list
-            appState.groups.push(groupData);
-          }
-        }
-      });
+                                if (userGroupInfo) {
+                                    // User has this group in their collection
+                                    appState.groups.push(groupData);
+                                } else if (
+                                    groupData.createdBy === appState.currentUserName ||
+                                    groupData.members.includes(appState.currentUserName)
+                                ) {
+                                    // Fallback check by createdBy or member list
+                                    appState.groups.push(groupData);
+                                }
+                            }
+                        });
 
-      // Update dashboard if a specific group is open, otherwise show groups list
-      if (appState.currentGroupId) {
-        updateDashboard();
-      } else {
-        showGroupsList();
-        // Render overall summary (this will hide skeleton after calculation)
-        renderOverallSummary();
-      }
-    });
-  } catch (error) {
-    console.error('Error loading groups:', error);
-    showSuccessMsg('Error loading groups. Please refresh.');
-  }
-}
+                        // Update dashboard if a specific group is open, otherwise show groups list
+                        if (appState.currentGroupId) {
+                            updateDashboard();
+                        } else {
+                            showGroupsList();
+                            // Render overall summary (this will hide skeleton after calculation)
+                            renderOverallSummary();
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error loading groups:', error);
+                    showSuccessMsg('Error loading groups. Please refresh.');
+                }
+            }
 
             async function saveGroupToFirestore(group) {
                 try {
@@ -3489,26 +3597,26 @@
                 }
             }
 
-          async function renderOverallSummary() {
-  const summaryCard = document.getElementById('overallSummaryCard');
-  if (!summaryCard) return;
+            async function renderOverallSummary() {
+                const summaryCard = document.getElementById('overallSummaryCard');
+                if (!summaryCard) return;
 
-  // Show skeleton loader initially
-  const skeletonLoader = document.getElementById('summarySkeletonLoader');
-  const realContent = document.getElementById('realSummaryContent');
-  
-  if (skeletonLoader && realContent) {
-    skeletonLoader.classList.remove('hidden');
-    realContent.classList.add('hidden');
-  }
+                // Show skeleton loader initially
+                const skeletonLoader = document.getElementById('summarySkeletonLoader');
+                const realContent = document.getElementById('realSummaryContent');
 
-  const currentUser = window.auth.currentUser;
-  
-  if (!currentUser || !appState.currentUserGroups || appState.currentUserGroups.length === 0) {
-    // Hide skeleton, show empty state
-    hideAndShowSummary();
-    
-    const summaryHTML = `
+                if (skeletonLoader && realContent) {
+                    skeletonLoader.classList.remove('hidden');
+                    realContent.classList.add('hidden');
+                }
+
+                const currentUser = window.auth.currentUser;
+
+                if (!currentUser || !appState.currentUserGroups || appState.currentUserGroups.length === 0) {
+                    // Hide skeleton, show empty state
+                    hideAndShowSummary();
+
+                    const summaryHTML = `
       <div class="summary-header">
         <h3 class="summary-header-title">Overall Summary</h3>
       </div>
@@ -3516,34 +3624,34 @@
         <p>No groups yet. Create or join a group to get started!</p>
       </div>
     `;
-    realContent.innerHTML = summaryHTML;
-    return;
-  }
+                    realContent.innerHTML = summaryHTML;
+                    return;
+                }
 
-  // Calculate totals
-  let totalOwe = 0;
-  let totalOwed = 0;
-  const groupSummaries = [];
+                // Calculate totals
+                let totalOwe = 0;
+                let totalOwed = 0;
+                const groupSummaries = [];
 
-  for (const userGroup of appState.currentUserGroups) {
-    const group = appState.groups.find(g => g.id === userGroup.groupId);
-    if (group) {
-      totalOwe += userGroup.needToPay || 0;
-      totalOwed += userGroup.willReceive || 0;
+                for (const userGroup of appState.currentUserGroups) {
+                    const group = appState.groups.find(g => g.id === userGroup.groupId);
+                    if (group) {
+                        totalOwe += userGroup.needToPay || 0;
+                        totalOwed += userGroup.willReceive || 0;
 
-      // Only include if there's an amount to show
-      if ((userGroup.needToPay || 0) > 0 || (userGroup.willReceive || 0) > 0) {
-        groupSummaries.push({
-          name: group.name,
-          needToPay: userGroup.needToPay || 0,
-          willReceive: userGroup.willReceive || 0
-        });
-      }
-    }
-  }
+                        // Only include if there's an amount to show
+                        if ((userGroup.needToPay || 0) > 0 || (userGroup.willReceive || 0) > 0) {
+                            groupSummaries.push({
+                                name: group.name,
+                                needToPay: userGroup.needToPay || 0,
+                                willReceive: userGroup.willReceive || 0
+                            });
+                        }
+                    }
+                }
 
-  // Build summary HTML
-  let summaryHTML = `
+                // Build summary HTML
+                let summaryHTML = `
     <div class="summary-header">
       <h3 class="summary-header-title">Overall Summary</h3>
     </div>
@@ -3567,15 +3675,15 @@
     </div>
   `;
 
-  // Add group-wise breakdown if available
-  if (groupSummaries.length > 0) {
-    summaryHTML += `
+                // Add group-wise breakdown if available
+                if (groupSummaries.length > 0) {
+                    summaryHTML += `
       <div class="summary-groups-list">
         <h4 style="color: #1B5E20; font-size: 15px; font-weight: 600; margin: 20px 0 0px 0;">By Group</h4>
     `;
-    
-    groupSummaries.forEach(summary => {
-      summaryHTML += `
+
+                    groupSummaries.forEach(summary => {
+                        summaryHTML += `
         <div class="summary-group-item">
           <div class="summary-group-name">${summary.name}</div>
           <div class="summary-group-amounts">
@@ -3594,51 +3702,51 @@
           </div>
         </div>
       `;
-    });
-    
-    summaryHTML += `</div>`;
-  }
+                    });
 
-  // Add "all settled" message if no balances
-  if (totalOwe === 0 && totalOwed === 0 && appState.currentUserGroups.length > 0) {
-    summaryHTML += `
+                    summaryHTML += `</div>`;
+                }
+
+                // Add "all settled" message if no balances
+                if (totalOwe === 0 && totalOwed === 0 && appState.currentUserGroups.length > 0) {
+                    summaryHTML += `
       <div class="summary-settled-message">
         <span class="summary-settled-message-icon">✓</span>
         <span class="summary-settled-message-text">Everything is all settled up!</span>
       </div>
     `;
-  }
+                }
 
-  // Update real content with calculated summary
-  realContent.innerHTML = summaryHTML;
-  
-  // Hide skeleton loader and show real content
-  hideAndShowSummary();
-}
+                // Update real content with calculated summary
+                realContent.innerHTML = summaryHTML;
 
-// Helper function to switch from skeleton to real content
-function hideAndShowSummary() {
-  const skeletonLoader = document.getElementById('summarySkeletonLoader');
-  const realContent = document.getElementById('realSummaryContent');
-  
-  if (skeletonLoader) skeletonLoader.classList.add('hidden');
-  if (realContent) realContent.classList.remove('hidden');
-}
+                // Hide skeleton loader and show real content
+                hideAndShowSummary();
+            }
+
+            // Helper function to switch from skeleton to real content
+            function hideAndShowSummary() {
+                const skeletonLoader = document.getElementById('summarySkeletonLoader');
+                const realContent = document.getElementById('realSummaryContent');
+
+                if (skeletonLoader) skeletonLoader.classList.add('hidden');
+                if (realContent) realContent.classList.remove('hidden');
+            }
 
             function showGroupsList() {
 
-                 showScreen('screen-groups-list');
-  
-  // Show skeleton loader immediately
-  const skeletonLoader = document.getElementById('summarySkeletonLoader');
-  const realContent = document.getElementById('realSummaryContent');
-  if (skeletonLoader && realContent) {
-    skeletonLoader.classList.remove('hidden');
-    realContent.classList.add('hidden');
-  }
+                showScreen('screen-groups-list');
 
-  // Render actual summary (will hide skeleton after calculation)
-  renderOverallSummary();
+                // Show skeleton loader immediately
+                const skeletonLoader = document.getElementById('summarySkeletonLoader');
+                const realContent = document.getElementById('realSummaryContent');
+                if (skeletonLoader && realContent) {
+                    skeletonLoader.classList.remove('hidden');
+                    realContent.classList.add('hidden');
+                }
+
+                // Render actual summary (will hide skeleton after calculation)
+                renderOverallSummary();
 
                 // Scroll to top
                 window.scrollTo(0, 0);
@@ -4484,14 +4592,19 @@ function hideAndShowSummary() {
                     if (diff < 0.01) {
                         infoEl.textContent = `✓ Total matches: ₹${sumOfSplits.toFixed(2)}`;
                         infoEl.style.background = '#E8F5E9';
-                    } else {
-                        infoEl.textContent = `⚠ Total: ₹${sumOfSplits.toFixed(2)} (Expected: ₹${totalAmount.toFixed(2)})`;
+                    } else if (sumOfSplits < totalAmount) {
+                        const remaining = totalAmount - sumOfSplits;
+                        infoEl.textContent = `⚠ Total: ₹${sumOfSplits.toFixed(2)} (Remaining: ₹${remaining.toFixed(2)})`;
                         infoEl.style.background = '#FFF3E0';
+                    } else if (sumOfSplits > totalAmount) {
+                        infoEl.textContent = `⚠ Total: ₹${sumOfSplits.toFixed(2)} (Over by: ₹${(sumOfSplits - totalAmount).toFixed(2)})`;
+                        infoEl.style.background = '#FFEBEE';
                     }
                 } else {
                     infoEl.textContent = 'Enter expense amount first';
                     infoEl.style.background = '#E8F5E9';
                 }
+
             }
 
             function openAddExpenseModal() {
@@ -4619,7 +4732,7 @@ function hideAndShowSummary() {
                     checkboxItem.className = 'checkbox-item';
                     checkboxItem.innerHTML = `
                     <input type="checkbox" id="split-${index}" value="${member}" onchange="updateSplitInfo()">
-                    <label for="split-${index}" style="cursor: pointer; flex: 1;">${member}</label>
+                    <label for="split-${index}" style="cursor: pointer; flex: 1; margin: 0px;">${member}</label>
                 `;
                     splitAmongList.appendChild(checkboxItem);
                 });
