@@ -1322,7 +1322,7 @@
         }
 
         .radio-option {
-            flex: 1;
+            flex-grow: 1;
             min-width: 0;
             padding: 12px 10px;
             border: 2px solid #E0E0E0;
@@ -2061,6 +2061,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-top: 24px;
         }
 
         /* Skeleton Loaders */
@@ -3679,7 +3680,7 @@
                 if (groupSummaries.length > 0) {
                     summaryHTML += `
       <div class="summary-groups-list">
-        <h4 style="color: #1B5E20; font-size: 15px; font-weight: 600; margin: 20px 0 0px 0;">By Group</h4>
+        
     `;
 
                     groupSummaries.forEach(summary => {
