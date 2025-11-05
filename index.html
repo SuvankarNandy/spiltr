@@ -2538,6 +2538,46 @@ ease;
     font-weight: bold;
 }
 
+/* Select Group Modal Header */
+.select-group-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.select-group-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.select-group-header-content {
+    flex: 1;
+}
+
+.select-group-header-content .modal-header {
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-size: 20px;
+}
+
+.select-group-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0 0 0;
+    line-height: 1.4;
+}
+
+.group-selection-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+
 }
 
     </style>
@@ -3061,18 +3101,32 @@ ease;
                 </div>
             </div>
 
+                        </div>
+
+            <!-- Modal: Select Group for Quick Add Expense -->
             <div class="modal" id="selectGroupModal">
                 <div class="modal-content">
-                    <div class="modal-header">Select a Group</div>
-                    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Choose which group you want to add an expense to</p>
+                    <!-- Custom Header with Image -->
+                    <div class="select-group-header">
+                        <img src="https://i.ibb.co/zTZJH0tV/Gemini-Generated-Image-aif7d5aif7d5aif7-removebg-preview.png" 
+                             alt="Select Group Icon" 
+                             class="select-group-icon">
+                        <div class="select-group-header-content">
+                            <div class="modal-header">Select a Group</div>
+                            <p class="select-group-subtitle">Choose which group you want to add an expense to</p>
+                        </div>
+                    </div>
                     
-                    <div id="groupSelectionList" style="max-height: 400px; overflow-y: auto;">
+                    <div id="groupSelectionList" class="group-selection-list-container">
                         <!-- Groups will be dynamically populated here -->
                     </div>
 
                     <button class="btn btn-secondary" onclick="closeGroupSelectionModal()" style="margin-top: 20px;">Cancel</button>
                 </div>
             </div>
+
+        </div>
+
 
         </div>
 
