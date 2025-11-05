@@ -2408,6 +2408,91 @@
         .launch-screen-hidden {
             display: none !important;
         }
+
+        /* Quick Add Expense Button */
+.quick-add-expense-btn {
+       display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 12px;
+    background: #ffffff;
+    border-radius: 60px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 4px 5px 11px rgb(0 0 0 / 10%);
+    transition: all 0.3s 
+ease;
+    margin-bottom: 25px;
+}
+
+
+
+.quick-expense-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.quick-expense-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.quick-btn-text {
+    flex: 1;
+    text-align: center;
+    margin: 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #3c4a46;
+    letter-spacing: 0.3px;
+}
+
+.quick-add-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.quick-add-expense-btn:hover .quick-add-icon-container {
+    background-color: #45a049;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    transform: scale(1.08);
+}
+
+.quick-add-icon-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(1.1);
+}
+
+@media (max-width: 600px) {
+    
+
+    
+
+    .quick-expense-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .quick-add-icon-container {
+        width: 48px;
+        height: 48px;
+    }
+}
+
     </style>
 </head>
 
@@ -2529,6 +2614,16 @@
                         <p class="welcome-subtitle">Manage your groups and split expenses effortlessly</p>
                     </div>
                 </div>
+
+                <button class="quick-add-expense-btn" onclick="openAddExpenseModal()">
+                    <div class="quick-expense-icon">
+                        <img src="https://i.ibb.co/KxynK278/Whats-App-Image-2025-11-06-at-00-22-46-removebg-preview.png" alt="Expense Icon">
+                    </div>
+                    <div class="quick-btn-text">Add New Expense</div>
+                    <div class="quick-add-icon-container">
+                        <img src="https://i.ibb.co/hFVhsZrN/add-icon-add-post-video-photo-vector-images-292645-294-removebg-preview.png" alt="Add Icon">
+                    </div>
+                </button>
 
                 <div class="overall-summary-card" id="overallSummaryCard">
                     <!-- Skeleton Loader (shown initially) -->
