@@ -4922,13 +4922,19 @@ function selectGroupAndAddExpense(groupId) {
                 populateExpenseForm(group);
                 document.querySelectorAll('#splitAmongList input[type="checkbox"]').forEach(cb => cb.checked = true);
                 updateSplitInfo();
-                const modal = document.getElementById('addExpenseModal');
+                 const modal = document.getElementById('addExpenseModal');
                 modal.classList.add('active');
-                // Scroll to top
+                // Scroll to top and focus on expense name
                 setTimeout(() => {
                     const modalContent = modal.querySelector('.modal-content');
                     if (modalContent) modalContent.scrollTop = 0;
-                }, 0);
+                    
+                    // Auto-focus on expense name field
+                    const expenseNameField = document.getElementById('expenseName');
+                    if (expenseNameField) {
+                        expenseNameField.focus();
+                    }
+                }, 100);
 
             }
 
@@ -4986,13 +4992,19 @@ function selectGroupAndAddExpense(groupId) {
                 }
 
                 updateSplitInfo();
-                const modal = document.getElementById('addExpenseModal');
+                 const modal = document.getElementById('addExpenseModal');
                 modal.classList.add('active');
-                // Scroll to top
+                // Scroll to top and focus on expense name
                 setTimeout(() => {
                     const modalContent = modal.querySelector('.modal-content');
                     if (modalContent) modalContent.scrollTop = 0;
-                }, 0);
+                    
+                    // Auto-focus on expense name field
+                    const expenseNameField = document.getElementById('expenseName');
+                    if (expenseNameField) {
+                        expenseNameField.focus();
+                    }
+                }, 100);
 
             }
 
