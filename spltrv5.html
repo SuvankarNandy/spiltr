@@ -2268,30 +2268,12 @@
         }
 
 
-               .summary-no-data {
+        .summary-no-data {
             text-align: center;
             padding: 30px;
             color: #757575;
             font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
         }
-
-        .summary-no-data-image {
-            width: 160px;
-            height: 160px;
-            object-fit: contain;
-            margin-bottom: 10px;
-        }
-
-        .summary-no-data p {
-            font-size: 16px;
-            margin: 0;
-            line-height: 1.6;
-        }
-
 
         .summary-settled-message {
             text-align: center;
@@ -2426,178 +2408,6 @@
         .launch-screen-hidden {
             display: none !important;
         }
-
-        /* Quick Add Expense Button */
-.quick-add-expense-btn {
-       display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 5px 12px;
-    background: #ffffff;
-    border-radius: 60px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 4px 5px 11px rgb(0 0 0 / 10%);
-    transition: all 0.3s 
-ease;
-    margin-bottom: 25px;
-}
-
-
-
-.quick-expense-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70px;
-    height: 70px;
-    flex-shrink: 0;
-}
-
-.quick-expense-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.quick-btn-text {
-    flex: 1;
-    text-align: center;
-    margin: 0 20px;
-    font-size: 18px;
-    font-weight: 700;
-    color: #3c4a46;
-    letter-spacing: 0.3px;
-}
-
-.quick-add-icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-}
-
-.quick-add-expense-btn:hover .quick-add-icon-container {
-    background-color: #45a049;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-    transform: scale(1.08);
-}
-
-.quick-add-icon-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(1.1);
-}
-
-@media (max-width: 600px) {
-    
-
-    
-
-    .quick-expense-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    .quick-add-icon-container {
-        width: 48px;
-        height: 48px;
-    }
-
-    /* Group Selection Modal Items */
-.group-selection-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    background: white;
-    border: 2px solid #E0E0E0;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.group-selection-item:hover {
-    border-color: #4CAF50;
-    background: #f9f9f9;
-    transform: translateX(4px);
-}
-
-.group-selection-item:active {
-    transform: scale(0.98);
-}
-
-.group-selection-info {
-    flex: 1;
-}
-
-.group-selection-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1B5E20;
-    margin-bottom: 4px;
-}
-
-.group-selection-members {
-    font-size: 13px;
-    color: #757575;
-}
-
-.group-selection-arrow {
-    color: #4CAF50;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* Select Group Modal Header */
-.select-group-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.select-group-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.select-group-header-content {
-    flex: 1;
-}
-
-.select-group-header-content .modal-header {
-    padding: 0;
-    margin: 0;
-    border: none;
-    font-size: 20px;
-}
-
-.select-group-subtitle {
-    color: #666;
-    font-size: 14px;
-    margin: 5px 0 0 0;
-    line-height: 1.4;
-}
-
-.group-selection-list-container {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 15px;
-}
-
-
-}
-
     </style>
 </head>
 
@@ -2720,17 +2530,6 @@ ease;
                     </div>
                 </div>
 
-               <button class="quick-add-expense-btn" onclick="showGroupSelectionModal()">
-
-                    <div class="quick-expense-icon">
-                        <img src="https://i.ibb.co/KxynK278/Whats-App-Image-2025-11-06-at-00-22-46-removebg-preview.png" alt="Expense Icon">
-                    </div>
-                    <div class="quick-btn-text">Add New Expense</div>
-                    <div class="quick-add-icon-container">
-                        <img src="https://i.ibb.co/hFVhsZrN/add-icon-add-post-video-photo-vector-images-292645-294-removebg-preview.png" alt="Add Icon">
-                    </div>
-                </button>
-
                 <div class="overall-summary-card" id="overallSummaryCard">
                     <!-- Skeleton Loader (shown initially) -->
                     <div class="skeleton-summary-card" id="summarySkeletonLoader">
@@ -2758,7 +2557,7 @@ ease;
 
 
 
-                <h2 id="myGroupsHeading" style="margin-bottom: 20px; color: #1B5E20;">My Groups</h2>
+                <h2 style="margin-bottom: 20px; color: #1B5E20;">My Groups</h2>
 
                 <div id="groupsList">
                     <div class="skeleton-group-card">
@@ -3118,33 +2917,6 @@ ease;
 
                 </div>
             </div>
-
-                        </div>
-
-            <!-- Modal: Select Group for Quick Add Expense -->
-            <div class="modal" id="selectGroupModal">
-                <div class="modal-content">
-                    <!-- Custom Header with Image -->
-                    <div class="select-group-header">
-                        <img src="https://i.ibb.co/zTZJH0tV/Gemini-Generated-Image-aif7d5aif7d5aif7-removebg-preview.png" 
-                             alt="Select Group Icon" 
-                             class="select-group-icon">
-                        <div class="select-group-header-content">
-                            <div class="modal-header">Select a Group</div>
-                            <p class="select-group-subtitle">Choose which group you want to add an expense to</p>
-                        </div>
-                    </div>
-                    
-                    <div id="groupSelectionList" class="group-selection-list-container">
-                        <!-- Groups will be dynamically populated here -->
-                    </div>
-
-                    <button class="btn btn-secondary" onclick="closeGroupSelectionModal()" style="margin-top: 20px;">Cancel</button>
-                </div>
-            </div>
-
-        </div>
-
 
         </div>
 
@@ -3601,62 +3373,6 @@ ease;
                 };
             }
 
-            // Show group selection modal
-function showGroupSelectionModal() {
-    const modal = document.getElementById('selectGroupModal');
-    const groupList = document.getElementById('groupSelectionList');
-    
-    if (!modal || !groupList) return;
-    
-    // Check if user has groups
-    if (!appState.groups || appState.groups.length === 0) {
-        showSuccessMsg('Please create or join a group first!');
-        return;
-    }
-    
-    // Build group selection list
-    let groupsHTML = '';
-    
-    appState.groups.forEach(group => {
-        const memberCount = group.members ? group.members.length : 0;
-        groupsHTML += `
-            <div class="group-selection-item" onclick="selectGroupAndAddExpense('${group.id}')">
-                <div class="group-selection-info">
-                    <div class="group-selection-name">${group.name}</div>
-                    <div class="group-selection-members">${memberCount} member${memberCount !== 1 ? 's' : ''}</div>
-                </div>
-                <div class="group-selection-arrow">→</div>
-            </div>
-        `;
-    });
-    
-    groupList.innerHTML = groupsHTML;
-    modal.classList.add('active');
-}
-
-// Close group selection modal
-function closeGroupSelectionModal() {
-    const modal = document.getElementById('selectGroupModal');
-    if (modal) {
-        modal.classList.remove('active');
-    }
-}
-
-// Select group and open add expense
-function selectGroupAndAddExpense(groupId) {
-    // Close the selection modal
-    closeGroupSelectionModal();
-    
-    // Open the selected group
-    openGroup(groupId);
-    
-    // Small delay to ensure group is loaded, then open add expense modal
-    setTimeout(() => {
-        openAddExpenseModal();
-    }, 300);
-}
-
-
             function backToGroupId() {
                 document.getElementById('joinGroupStep2').classList.remove('active');
                 document.getElementById('joinGroupStep1').classList.add('active');
@@ -3966,18 +3682,14 @@ function selectGroupAndAddExpense(groupId) {
                     // Hide skeleton, show empty state
                     hideAndShowSummary();
 
-                       const summaryHTML = `
+                    const summaryHTML = `
       <div class="summary-header">
         <h3 class="summary-header-title">Overall Summary</h3>
       </div>
       <div class="summary-no-data">
-        <img src="https://i.ibb.co/mVGsYmP1/Whats-App-Image-2025-11-06-at-03-40-08-removebg-preview.png" 
-             alt="No groups" 
-             class="summary-no-data-image">
-        <p><b>No groups yet.</b> Create or join a group to get started!</p>
+        <p>No groups yet. Create or join a group to get started!</p>
       </div>
     `;
-
                     realContent.innerHTML = summaryHTML;
                     return;
                 }
@@ -4145,23 +3857,31 @@ function selectGroupAndAddExpense(groupId) {
                 document.getElementById('deleteGroupOption').style.display = 'none';
 
                 if (appState.groups.length === 0) {
-                    // Hide heading and list when no groups
-                    const myGroupsHeading = document.getElementById('myGroupsHeading');
-                    if (myGroupsHeading) {
-                        myGroupsHeading.style.display = 'none';
-                    }
-                    groupsList.style.display = 'none';
+                    groupsList.innerHTML = `
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+    <div class="skeleton-group-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-info"></div>
+        <div class="skeleton skeleton-info"></div>
+    </div>
+`;
 
-
-                                } else {
-                    // Show heading and list when groups exist
-                    const myGroupsHeading = document.getElementById('myGroupsHeading');
-                    if (myGroupsHeading) {
-                        myGroupsHeading.style.display = 'block';
-                    }
-                    groupsList.style.display = 'block';
+                } else {
                     groupsList.innerHTML = '';
-
                     appState.groups.forEach(group => {
                         const groupCard = document.createElement('div');
                         groupCard.className = 'group-card';
@@ -4990,19 +4710,13 @@ function selectGroupAndAddExpense(groupId) {
                 populateExpenseForm(group);
                 document.querySelectorAll('#splitAmongList input[type="checkbox"]').forEach(cb => cb.checked = true);
                 updateSplitInfo();
-                 const modal = document.getElementById('addExpenseModal');
+                const modal = document.getElementById('addExpenseModal');
                 modal.classList.add('active');
-                // Scroll to top and focus on expense name
+                // Scroll to top
                 setTimeout(() => {
                     const modalContent = modal.querySelector('.modal-content');
                     if (modalContent) modalContent.scrollTop = 0;
-                    
-                    // Auto-focus on expense name field
-                    const expenseNameField = document.getElementById('expenseName');
-                    if (expenseNameField) {
-                        expenseNameField.focus();
-                    }
-                }, 100);
+                }, 0);
 
             }
 
@@ -5060,19 +4774,13 @@ function selectGroupAndAddExpense(groupId) {
                 }
 
                 updateSplitInfo();
-                 const modal = document.getElementById('addExpenseModal');
+                const modal = document.getElementById('addExpenseModal');
                 modal.classList.add('active');
-                // Scroll to top and focus on expense name
+                // Scroll to top
                 setTimeout(() => {
                     const modalContent = modal.querySelector('.modal-content');
                     if (modalContent) modalContent.scrollTop = 0;
-                    
-                    // Auto-focus on expense name field
-                    const expenseNameField = document.getElementById('expenseName');
-                    if (expenseNameField) {
-                        expenseNameField.focus();
-                    }
-                }, 100);
+                }, 0);
 
             }
 
