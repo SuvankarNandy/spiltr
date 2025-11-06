@@ -2597,6 +2597,82 @@ ease;
 
 }
 
+/* Username Setup Modal - Non-dismissable */
+#setUsernameModal {
+    pointer-events: auto !important;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#setUsernameModal .modal-content {
+    pointer-events: auto;
+    animation: slideInScale 0.4s ease-out;
+}
+
+#setUsernameModal.active {
+    pointer-events: auto !important;
+}
+
+/* Prevent closing by clicking outside */
+#setUsernameModal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+/* Header Layout - Image Left, Text Right */
+.username-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #E8F5E9;
+}
+
+.username-welcome-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.username-welcome-text {
+    flex: 1;
+}
+
+.username-welcome-title {
+    color: #1B5E20;
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.username-welcome-desc {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@keyframes slideInScale {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+
+
+
     </style>
 </head>
 
@@ -3142,6 +3218,42 @@ ease;
                 </div>
             </div>
 
+            <!-- Modal: Set Username (Non-dismissable) -->
+            <div class="modal" id="setUsernameModal" style="pointer-events: auto;">
+                <div class="modal-content" style="max-width: 500px;">
+                    <!-- Header with Image on Left, Text on Right -->
+                    <div class="username-modal-header">
+                        <img src="https://i.ibb.co/KxynK278/Whats-App-Image-2025-11-06-at-00-22-46-removebg-preview.png" 
+                             alt="Welcome" 
+                             class="username-welcome-img">
+                        <div class="username-welcome-text">
+                            <h2 class="username-welcome-title">Welcome! 👋</h2>
+                            <p class="username-welcome-desc">
+                                Enter your First name/Nick name or any Cool name you have
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="input-group" style="margin-top: 25px;">
+                        <label for="usernameInput">Your Name</label>
+                        <input type="text" 
+                               id="usernameInput" 
+                               placeholder="e.g., John Doe, JD, Cool Guy"
+                               maxlength="50"
+                               style="font-size: 16px;">
+                        <small id="usernameError" style="color: #f44336; font-size: 12px; display: none; margin-top: 5px;">
+                            Please enter a valid name (at least 2 characters)
+                        </small>
+                    </div>
+
+                    <button class="btn btn-primary" 
+                            onclick="saveUsername()" 
+                            style="width: 100%; font-size: 16px; padding: 14px;">
+                        Proceed →
+                    </button>
+                </div>
+            </div>
+
         </div>
 
 
@@ -3270,48 +3382,156 @@ ease;
                 }
             }
 
-            async function createOrUpdateUser(user) {
+                       async function createOrUpdateUser(user) {
                 try {
                     const { doc, getDoc, setDoc } = window.firestoreFunctions;
                     const userRef = doc(window.db, 'users', user.uid);
                     const userSnap = await getDoc(userRef);
 
                     if (!userSnap.exists()) {
-                        // New user - create document
+                        // New user - create document WITHOUT username
                         await setDoc(userRef, {
                             email: user.email,
-                            userName: user.displayName || user.email.split('@')[0],
+                            userName: '',  // Empty - will be set by modal
                             createdAt: new Date().toISOString(),
                             groups: [],
                             photoURL: user.photoURL || ''
                         });
 
-                        appState.currentUserName = user.displayName || user.email.split('@')[0];
+                        appState.currentUserName = '';
+                        appState.currentUserUid = user.uid;
+                        
+                        // Show username setup modal
+                        showUsernameSetupModal();
                     } else {
-                        // Existing user - just load data
+                        // Existing user - check if username is set
                         const userData = userSnap.data();
-                        appState.currentUserName = userData.userName;
+                        appState.currentUserName = userData.userName || '';
+                        appState.currentUserUid = user.uid;
+                        
+                        // If username is empty or not set, show modal
+                        if (!userData.userName || userData.userName.trim() === '') {
+                            showUsernameSetupModal();
+                        } else {
+                            // Username exists, proceed normally
+                            localStorage.setItem('splitwise_username', appState.currentUserName);
+                            localStorage.setItem('splitwise_user_uid', user.uid);
+                        }
                     }
-
-                    // Store in localStorage for quick access
-                    localStorage.setItem('splitwise_username', appState.currentUserName);
-                    localStorage.setItem('splitwise_user_uid', user.uid);
                 } catch (error) {
                     console.error('Error creating/updating user:', error);
                 }
             }
+            // Show username setup modal (non-dismissable)
+            function showUsernameSetupModal() {
+                const modal = document.getElementById('setUsernameModal');
+                const input = document.getElementById('usernameInput');
+                const error = document.getElementById('usernameError');
+                
+                if (modal && input) {
+                    // Clear previous input
+                    input.value = '';
+                    error.style.display = 'none';
+                    
+                    // Show modal
+                    modal.classList.add('active');
+                    
+                    // Focus on input after a short delay
+                    setTimeout(() => {
+                        input.focus();
+                    }, 300);
+                    
+                    // Allow Enter key to submit
+                    input.onkeypress = function(e) {
+                        if (e.key === 'Enter') {
+                            saveUsername();
+                        }
+                    };
+                }
+            }
 
+            // Save username to Firebase
+            async function saveUsername() {
+                const input = document.getElementById('usernameInput');
+                const error = document.getElementById('usernameError');
+                const modal = document.getElementById('setUsernameModal');
+                
+                if (!input || !error || !modal) return;
+                
+                const username = input.value.trim();
+                
+                // Validate username
+                if (username.length < 2) {
+                    error.style.display = 'block';
+                    input.style.borderColor = '#f44336';
+                    input.focus();
+                    return;
+                }
+                
+                // Hide error if shown
+                error.style.display = 'none';
+                input.style.borderColor = '';
+                
+                try {
+                    // Disable button to prevent double-click
+                    const btn = event.target;
+                    btn.disabled = true;
+                    btn.textContent = 'Saving...';
+                    
+                    const currentUser = window.auth.currentUser;
+                    if (!currentUser) {
+                        throw new Error('No user logged in');
+                    }
+                    
+                    // Update user document in Firebase
+                    const { doc, updateDoc } = window.firestoreFunctions;
+                    const userRef = doc(window.db, 'users', currentUser.uid);
+                    
+                    await updateDoc(userRef, {
+                        userName: username
+                    });
+                    
+                    // Update app state
+                    appState.currentUserName = username;
+                    
+                    // Store in localStorage
+                    localStorage.setItem('splitwise_username', username);
+                    localStorage.setItem('splitwise_user_uid', currentUser.uid);
+                    
+                    // Close modal
+                    modal.classList.remove('active');
+                    
+                    // Show success message
+                    showSuccessMsg(`Welcome ${username}! 🎉`);
+                    
+                    // Initialize app
+                    await initApp();
+                    
+                } catch (error) {
+                    console.error('Error saving username:', error);
+                    alert('Failed to save username. Please try again.');
+                    
+                    // Re-enable button
+                    const btn = event.target;
+                    btn.disabled = false;
+                    btn.textContent = 'Proceed →';
+                }
+            }
 
             async function handleLogout() {
                 toggleMenu();
                 if (confirm('Are you sure you want to logout?')) {
                     try {
-                        await window.firebaseAuth.signOut(window.auth);
+                        await performLogout();
                         showSuccessMsg('Logged out successfully!');
                     } catch (error) {
                         alert('Logout failed: ' + error.message);
                     }
                 }
+            }
+
+            async function performLogout() {
+               return await window.firebaseAuth.signOut(window.auth);
             }
 
             async function initApp() {
@@ -3324,13 +3544,24 @@ ease;
 
                         if (userSnap.exists()) {
                             const userData = userSnap.data();
-                            appState.currentUserName = userData.userName;
+                            appState.currentUserName = userData.userName || '';
                             appState.currentUserUid = currentUser.uid;
                             appState.currentUserGroups = userData.groups || [];
+                            
+                            // Check if username is set
+                            if (!userData.userName || userData.userName.trim() === '') {
+                                // Username not set, show modal
+                                showUsernameSetupModal();
+                                return; // Don't load groups yet
+                            }
                         } else {
-                            appState.currentUserName = currentUser.displayName || currentUser.email.split('@')[0];
+                            // User document doesn't exist (shouldn't happen, but handle it)
+                            appState.currentUserName = '';
                             appState.currentUserUid = currentUser.uid;
                             appState.currentUserGroups = [];
+                            performLogout();
+                            // showUsernameSetupModal();
+                            return;
                         }
 
                         localStorage.setItem('splitwise_username', appState.currentUserName);
@@ -4354,8 +4585,8 @@ function selectGroupAndAddExpense(groupId) {
                         }
                     }
 
-                    // Add to local state immediately
-                    appState.groups.push(newGroup);
+                     // Don't add to local state - onSnapshot will handle it automatically
+                    // appState.groups.push(newGroup); ← REMOVED
 
                     showSuccessMsg('✓ Group created successfully!');
                     openGroup(newGroup.id);
@@ -4412,8 +4643,8 @@ function selectGroupAndAddExpense(groupId) {
                         }
                     }
 
-                    // Add to local state immediately
-                    appState.groups.push(newGroup);
+                    // Don't add to local state - onSnapshot will handle it automatically
+                    // appState.groups.push(newGroup); ← REMOVED
 
                     showSuccessMsg('✓ Group created successfully!');
                     openGroup(newGroup.id);
