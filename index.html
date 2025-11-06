@@ -20,15 +20,17 @@
             color: #333;
         }
 
-        .container {
+               .container {
             max-width: 600px;
             margin: 0 auto;
             background: #fbfbfb;
             min-height: 100vh;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding-top: 64px;
             padding-bottom: 100px;
-            position: relative
+            position: relative;
         }
+
 
         /* Launch Screen */
         #launch-screen {
@@ -272,7 +274,7 @@
             line-height: 1.5;
         }
 
-        .header {
+                .header {
             background: #4CAF50;
             color: white;
             padding: 18px;
@@ -281,17 +283,17 @@
             font-weight: bold;
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
+            width: 100%;
             max-width: 600px;
-            margin: 0 auto;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
+
 
 
         .header-left,
@@ -2751,7 +2753,9 @@ ease;
                     </button>
                 </div>
 
-                <span id="headerTitle">SplitWise Pro</span>
+                <span id="headerTitle" style="
+    max-width: 81%;
+">SplitWise Pro</span>
 
                 <div class="header-right">
                     <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
