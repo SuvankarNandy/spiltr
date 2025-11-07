@@ -1052,10 +1052,12 @@
         }
 
         .expense-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1B5E20;
-            margin-bottom: 5px;
+                font-size: 17px;
+    font-weight: 600;
+    color: #1B5E20;
+    margin-bottom: 9px;
+    margin-top: 2px;
+    max-width: 80%;
         }
 
         .expense-amount {
@@ -1147,7 +1149,7 @@
         }
 
         .expense-action-btn.delete {
-            color: #f44336;
+            color: #f44336de;
         }
 
         .fab {
@@ -2671,6 +2673,27 @@ ease;
     }
 }
 
+/* Dynamic header title sizing */
+#headerTitle {
+    font-size: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 120px);
+    transition: font-size 0.2s ease;
+}
+
+#headerTitle.long-title {
+    font-size: 21px;
+}
+
+#headerTitle.very-long-title {
+    font-size: 18px;
+}
+
+#headerTitle.extra-long-title {
+    font-size: 16px;
+}
 
 
 
@@ -4176,6 +4199,8 @@ function selectGroupAndAddExpense(groupId) {
                     closeEditGroupModal();
                     showSuccessMsg('✓ Group updated successfully!');
                     document.getElementById('headerTitle').textContent = newName;
+                    adjustHeaderTitleSize(newName);
+
                 } catch (error) {
                     alert('Error updating group: ' + error.message);
                 }
@@ -4370,6 +4395,7 @@ function selectGroupAndAddExpense(groupId) {
 
                 const groupsList = document.getElementById('groupsList');
                 document.getElementById('headerTitle').textContent = 'SplitWise Pro+';
+                adjustHeaderTitleSize('SplitWise Pro+');
                 document.getElementById('backBtn').style.display = 'none';
                 document.getElementById('fabButton').style.display = 'none';
 
@@ -4668,6 +4694,8 @@ function selectGroupAndAddExpense(groupId) {
                 if (!group) { alert('Group not found'); showGroupsList(); return; }
 
                 document.getElementById('headerTitle').textContent = group.name;
+                adjustHeaderTitleSize(group.name);
+
                 document.getElementById('backBtn').style.display = 'block';
                 document.getElementById('fabButton').style.display = 'flex';
 
@@ -4684,6 +4712,28 @@ function selectGroupAndAddExpense(groupId) {
 
                 updateDashboard();
             }
+
+            // Dynamically adjust header title font size based on text length
+            function adjustHeaderTitleSize(text) {
+                const headerTitle = document.getElementById('headerTitle');
+                if (!headerTitle) return;
+                
+                // Remove all sizing classes
+                headerTitle.classList.remove('long-title', 'very-long-title', 'extra-long-title');
+                
+                const textLength = text.length;
+                
+                // Apply class based on text length
+                if (textLength > 35) {
+                    headerTitle.classList.add('extra-long-title');
+                } else if (textLength > 25) {
+                    headerTitle.classList.add('very-long-title');
+                } else if (textLength > 18) {
+                    headerTitle.classList.add('long-title');
+                }
+                // else: use default 24px font-size
+            }
+
 
             function goBackToGroups() {
                 appState.currentGroupId = null;
@@ -5257,10 +5307,11 @@ function selectGroupAndAddExpense(groupId) {
                 document.getElementById('expenseAmount').value = expense.amount;
                 document.getElementById('expenseDateTime').value = expense.dateTime || getCurrentDateTime();
                 document.getElementById('expenseDateTime').max = getMaxDateTime();
-                document.getElementById('paidBy').value = expense.paidBy;
+                
 
                 appState.currentExpenseType = expense.type;
                 populateExpenseForm(group);
+                document.getElementById('paidBy').value = expense.paidBy;
 
                 document.querySelectorAll('.radio-option').forEach(option => option.classList.remove('active'));
 
@@ -5311,13 +5362,21 @@ function selectGroupAndAddExpense(groupId) {
             }
 
             function populateExpenseForm(group) {
-                const paidBySelect = document.getElementById('paidBy');
-                const currentPaidBy = paidBySelect.value;
+                                const paidBySelect = document.getElementById('paidBy');
+                const currentPaidBy = paidBySelect.value;  // Save current value
+                
+                // Clear and rebuild dropdown options
                 paidBySelect.innerHTML = '<option value="">Select member</option>';
                 group.members.forEach(member => {
                     paidBySelect.appendChild(new Option(member, member));
                 });
-                paidBySelect.value = currentPaidBy;
+                
+                // Only restore if we had a value AND it still exists in the group
+                if (currentPaidBy && group.members.includes(currentPaidBy)) {
+                    paidBySelect.value = currentPaidBy;
+                }
+                // If empty, leave it empty (openEditExpenseModal will set it)
+
 
                 const paidForSelect = document.getElementById('paidFor');
                 const currentPaidFor = paidForSelect.value;
@@ -5637,10 +5696,15 @@ function selectGroupAndAddExpense(groupId) {
                             const settlementItem = document.createElement('div');
                             settlementItem.className = 'settlement-item-card';
                             settlementItem.innerHTML = `
-                    <div class="expense-actions">
-                        <button class="expense-action-btn edit" onclick="openEditSettlementModal('${expense.id}')">Edit</button>
-                        <button class="expense-action-btn delete" onclick="deleteSettlement('${expense.id}')">Delete</button>
+                                        <div class="expense-actions">
+                        <button class="expense-action-btn edit" onclick="openEditSettlementModal('${expense.id}')" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="expense-action-btn delete" onclick="deleteSettlement('${expense.id}')" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </div>
+
                     <div class="settlement-label">SETTLEMENT</div>
                     <div class="settlement-text"><span class="settlement-icon">💸</span>${expense.from} paid ${expense.to}</div>
                     <div class="settlement-amount">₹${expense.amount.toFixed(2)}</div>
@@ -5653,9 +5717,15 @@ function selectGroupAndAddExpense(groupId) {
 
                             let html = `
                     <div class="expense-actions">
-                        <button class="expense-action-btn edit" onclick="openEditExpenseModal('${expense.id}')">Edit</button>
-                        <button class="expense-action-btn delete" onclick="deleteExpense('${expense.id}')">Delete</button>
+                        <button class="expense-action-btn edit" onclick="openEditExpenseModal('${expense.id}')" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="expense-action-btn delete" onclick="deleteExpense('${expense.id}')" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </div>
+
+
                     <div class="expense-title">${expense.name}</div>`;
 
                             if (expense.description) html += `<div class="expense-description">${expense.description}</div>`;
